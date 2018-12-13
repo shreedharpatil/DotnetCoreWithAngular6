@@ -14,10 +14,10 @@ export class AppComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('http://localhost:65148/api/sampledata/WeatherForecasts').subscribe(p => console.log(p));
+    this.httpClient.get('api/sampledata/WeatherForecasts').subscribe(p => console.log(p));
   }
 
   validateuserCredentials() {
-    this.httpClient.post('http://localhost:65148/api/Login', this.credentials).subscribe(p => { console.log(p); alert(p); });
+    this.httpClient.post('api/Login', this.credentials).subscribe(p => { console.log(p); alert(p); });
   }
 }
