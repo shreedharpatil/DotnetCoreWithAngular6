@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetCoreWithAngular6", "DotnetCoreWithAngular6\DotnetCoreWithAngular6.csproj", "{FA3B9C87-E145-4739-88C3-2C1BD49D51C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotnetCoreWithAngular6", "DotnetCoreWithAngular6\DotnetCoreWithAngular6.csproj", "{FA3B9C87-E145-4739-88C3-2C1BD49D51C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "File.Repository", "File.Repository\File.Repository.csproj", "{8AD0752E-630C-467F-ACE8-48E827EBFA80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Layer", "Common.Layer\Common.Layer.csproj", "{EC8BF900-C95B-49F2-8945-7841157ADAA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{FA3B9C87-E145-4739-88C3-2C1BD49D51C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA3B9C87-E145-4739-88C3-2C1BD49D51C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA3B9C87-E145-4739-88C3-2C1BD49D51C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AD0752E-630C-467F-ACE8-48E827EBFA80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AD0752E-630C-467F-ACE8-48E827EBFA80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AD0752E-630C-467F-ACE8-48E827EBFA80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AD0752E-630C-467F-ACE8-48E827EBFA80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC8BF900-C95B-49F2-8945-7841157ADAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC8BF900-C95B-49F2-8945-7841157ADAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC8BF900-C95B-49F2-8945-7841157ADAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC8BF900-C95B-49F2-8945-7841157ADAA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

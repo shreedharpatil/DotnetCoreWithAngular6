@@ -1,3 +1,5 @@
+using File.Repository.Implementations;
+using File.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +28,8 @@ namespace DotnetCoreWithAngular6
             {
                 configuration.RootPath = "ClientApp/dist/ClientApp";
             });
+
+            services.AddTransient<ILoginRepository, LoginRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
