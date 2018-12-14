@@ -23,7 +23,14 @@ namespace DotnetCoreWithAngular6.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Login login)
         {
-            return this.Ok(this.loginRepository.ValidateLoginCredentials(login));
+            try
+            {
+                return this.Ok(this.loginRepository.ValidateLoginCredentials(login));
+            }
+            catch(Exception ex)
+            {
+                return this.Ok(ex);
+            }            
         }
     }
 }
