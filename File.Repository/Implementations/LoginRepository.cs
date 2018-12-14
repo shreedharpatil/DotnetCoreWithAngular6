@@ -12,7 +12,7 @@ namespace File.Repository.Implementations
     {
         public bool ValidateLoginCredentials(Login login)
         {
-            var data = System.IO.File.ReadAllText("../File.Repository/Tables/Login.json");
+            var data = System.IO.File.ReadAllText("Tables/Login.json");
             var logins = JsonConvert.DeserializeObject<IEnumerable<Login>>(data);
             return logins.Any(p => p.Username == login.Username && p.Password == login.Password);
         }

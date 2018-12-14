@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Common.Layer\Common.Layer.csproj" />
+    <ProjectReference Include="..\Data.Repository\Data.Repository.csproj" />
     <ProjectReference Include="..\File.Repository\File.Repository.csproj" />
   </ItemGroup>
 

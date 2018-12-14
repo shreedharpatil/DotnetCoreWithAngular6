@@ -1,18 +1,32 @@
-using File.Repository.Implementations;
-using File.Repository.Interfaces;
+using Common.Layer.Models;
+using Data.Repository.DbContext;
+using Data.Repository.Implementations;
+using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace DotnetCoreWithAngular6
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public IConfigurationRoot ConfigurationRoot { get; }
+
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            ConfigurationRoot = builder.Build();
+
             Configuration = configuration;
         }
 
@@ -21,6 +35,9 @@ namespace DotnetCoreWithAngular6
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var config = ConfigurationRoot.Get<Configuration>();
+            services.AddTransient<Configuration>((p) => config);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
@@ -30,6 +47,8 @@ namespace DotnetCoreWithAngular6
             });
 
             services.AddTransient<ILoginRepository, LoginRepository>();
+            services.AddTransient<AemContext, AemContext> ();
+            services.AddDbContext<AemContext>(options => options.UseSqlServer(string.Format(config.AppSettings.ConnectionString, config.AppSettings.DbFilePath)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
