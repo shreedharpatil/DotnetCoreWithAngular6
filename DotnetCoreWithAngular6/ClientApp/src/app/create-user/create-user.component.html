@@ -1,0 +1,31 @@
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">RRNO</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="RRNO" [(ngModel)]="user.RRNo">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputPassword4">Firstname</label>
+      <input type="text" class="form-control" name="inputPassword4" placeholder="Enter firstname" [(ngModel)]="user.Firstname">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="inputPassword4">Lastname</label>
+      <input type="text" class="form-control" name="inputPassword4" placeholder="Enter lastname" [(ngModel)]="user.Lastname">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputAddress">Address</label>
+    <textarea class="form-control" name="exampleFormControlTextarea1" rows="3" [(ngModel)]="user.Address"></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Email Id</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="email Id" [(ngModel)]="user.Email">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Mobile number</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="Mobile No" [(ngModel)]="user.Mobile">
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="createUser()">Create</button>
+</form>
