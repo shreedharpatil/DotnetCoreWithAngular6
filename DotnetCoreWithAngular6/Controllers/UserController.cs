@@ -15,11 +15,13 @@ namespace DotnetCoreWithAngular6.Controllers
             this.userRepository = userRepository;
         }
 
+        [HttpGet]
         public IActionResult Get()
         {
             return this.Ok(this.userRepository.GetUsers());
         }
 
+        [HttpPost]
         public IActionResult Post([FromBody] User user)
         {
             this.userRepository.AddUser(user);

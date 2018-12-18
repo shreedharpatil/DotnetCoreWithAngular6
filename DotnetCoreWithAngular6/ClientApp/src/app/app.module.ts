@@ -9,13 +9,15 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './create-user/create-user.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    ViewUsersComponent
   ],
   imports: [
     BrowserModule,
