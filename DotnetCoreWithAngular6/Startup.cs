@@ -1,7 +1,7 @@
 using Common.Layer.Models;
 using Data.Repository.DbContext;
-using Data.Repository.Implementations;
-using Data.Repository.Interfaces;
+using File.Repository.Implementations;
+using File.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -47,8 +47,8 @@ namespace DotnetCoreWithAngular6
             });
 
             services.AddTransient<ILoginRepository, LoginRepository>();
-            services.AddTransient<AemContext, AemContext> ();
-            services.AddDbContext<AemContext>(options => options.UseSqlServer(string.Format(config.AppSettings.ConnectionString, config.AppSettings.DbFilePath)));
+            //services.AddTransient<AemContext, AemContext> ();
+            //services.AddDbContext<AemContext>(options => options.UseSqlServer(string.Format(config.AppSettings.ConnectionString, config.AppSettings.DbFilePath)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
