@@ -1,0 +1,1 @@
+﻿Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=D:\TRYOUTS\DOTNETCOREWITHANGULAR6\DATA.REPOSITORY\DB\AEM.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False

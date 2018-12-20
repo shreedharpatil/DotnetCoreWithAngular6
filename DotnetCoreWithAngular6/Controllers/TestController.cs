@@ -64,5 +64,21 @@ namespace DotnetCoreWithAngular6.Controllers
                 return this.Ok(ex);
             }
         }
+
+        [HttpGet]
+        [Route("get3")]
+        public IActionResult Get3()
+        {
+            try
+            {
+                var optionbuilder = new DbContextOptionsBuilder<AemContext>().UseSqlServer(System.IO.File.ReadAllText("Cn.txt"));
+                var context = new AemContext(optionbuilder.Options);
+                return this.Ok(context.Login.ToList());
+            }
+            catch (Exception ex)
+            {
+                return this.Ok(ex);
+            }
+        }
     }
 }
