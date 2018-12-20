@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { AddStateComponent } from './add-state/add-state.component';
+import { AddDistrictComponent } from './add-district/add-district.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ViewUsersComponent } from './view-users/view-users.component';
     HomepageComponent,
     LoginComponent,
     CreateUserComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    AddStateComponent,
+    AddDistrictComponent
   ],
   imports: [
     BrowserModule,

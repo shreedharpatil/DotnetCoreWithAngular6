@@ -1,0 +1,15 @@
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Select State</label>
+      <select [(ngModel)]="stateId" name="states">
+        <option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Name</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="District name" [(ngModel)]="district.Name">
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="saveDistrict()">Create</button>
+</form>

@@ -1,0 +1,9 @@
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">Name</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="State name" [(ngModel)]="state.Name">
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="saveState()">Create</button>
+</form>

@@ -4,6 +4,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { AddStateComponent } from './add-state/add-state.component';
+import { AddDistrictComponent } from './add-district/add-district.component';
 
 const routes: Routes = [
   {
@@ -20,6 +22,12 @@ const routes: Routes = [
   },
   {
     path: 'viewusers', component: ViewUsersComponent
+  },
+  {
+    path: 'addstate', component: AddStateComponent
+  },
+  {
+    path: 'adddistrict', component: AddDistrictComponent
   }
 ];
 

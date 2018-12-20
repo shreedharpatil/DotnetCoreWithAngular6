@@ -18,13 +18,17 @@
     <textarea class="form-control" name="exampleFormControlTextarea1" rows="3" [(ngModel)]="user.Address"></textarea>
   </div>
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="inputEmail4">Email Id</label>
       <input type="text" class="form-control" name="inputEmail4" placeholder="email Id" [(ngModel)]="user.Email">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label for="inputEmail4">Mobile number</label>
       <input type="text" class="form-control" name="inputEmail4" placeholder="Mobile No" [(ngModel)]="user.Mobile">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputEmail4">Energy Meter Mobile number</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="Mobile No" [(ngModel)]="user.EMMobile">
     </div>
   </div>
   <button type="button" class="btn btn-primary" (click)="createUser()">Create</button>

@@ -29,7 +29,7 @@ namespace DotnetCoreWithAngular6.Controllers
             }
             catch(Exception ex)
             {
-                return this.Ok(ex);
+                return this.StatusCode(500);
             }            
         }
     }

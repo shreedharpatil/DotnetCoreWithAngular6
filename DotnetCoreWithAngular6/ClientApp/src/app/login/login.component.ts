@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
   title = 'ClientApp';
-  credentials = { Username: 'username', Password: 'pwd' };
+  credentials = { Username: 'shreedhar', Password: 'patil' };
 
   constructor(private httpClient: HttpClient, private router: Router) { }
 
