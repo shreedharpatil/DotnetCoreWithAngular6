@@ -14,7 +14,7 @@
 
   <ItemGroup>
     <None Update="Tables\Address.json">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Tables\Login.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
