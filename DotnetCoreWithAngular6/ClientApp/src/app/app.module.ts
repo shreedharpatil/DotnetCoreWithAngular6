@@ -12,6 +12,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
 import { AddStateComponent } from './add-state/add-state.component';
 import { AddDistrictComponent } from './add-district/add-district.component';
+import { AddTalukComponent } from './add-taluk/add-taluk.component';
+import { AddVillageComponent } from './add-village/add-village.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AddDistrictComponent } from './add-district/add-district.component';
     CreateUserComponent,
     ViewUsersComponent,
     AddStateComponent,
-    AddDistrictComponent
+    AddDistrictComponent,
+    AddTalukComponent,
+    AddVillageComponent
   ],
   imports: [
     BrowserModule,

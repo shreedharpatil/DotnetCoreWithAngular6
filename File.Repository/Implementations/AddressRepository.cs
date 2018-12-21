@@ -74,5 +74,64 @@ namespace File.Repository.Implementations
             var state = states.FirstOrDefault(p => p.Id == stateId);
             return state?.Districts;
         }
+
+        public void AddTaluk(int stateId, int districtId, Taluk taluk)
+        {
+            var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
+            var states = JsonConvert.DeserializeObject<List<State>>(data);
+
+            if (states.Any())
+            {
+                var state = states.FirstOrDefault(p => p.Id == stateId);
+                var district = state.Districts.FirstOrDefault(p => p.Id == districtId);
+                if(district != null)
+                {
+                    if (district.Taluks != null && district.Taluks.Any())
+                    {
+                        taluk.Id = district.Taluks.Max(p => p.Id) + 1;
+                    }
+                    else
+                    {
+                        taluk.Id = 1;
+                    }
+
+                    var taluks = district.Taluks.ToList();
+                    taluks.Add(taluk);
+                    district.Taluks = taluks;
+                }                
+            }
+
+            System.IO.File.WriteAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"), JsonConvert.SerializeObject(states));
+        }
+
+        public void AddVillage(int stateId, int districtId, int talukId, Village village)
+        {
+            var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
+            var states = JsonConvert.DeserializeObject<List<State>>(data);
+
+            if (states.Any())
+            {
+                var state = states.FirstOrDefault(p => p.Id == stateId);
+                var district = state.Districts.FirstOrDefault(p => p.Id == districtId);
+                var taluk = district.Taluks.FirstOrDefault(p => p.Id == talukId);
+                if (taluk != null)
+                {
+                    if (taluk.Villages != null && taluk.Villages.Any())
+                    {
+                        village.Id = taluk.Villages.Max(p => p.Id) + 1;
+                    }
+                    else
+                    {
+                        village.Id = 1;
+                    }
+
+                    var villages = taluk.Villages.ToList();
+                    villages.Add(village);
+                    taluk.Villages = villages;
+                }
+            }
+
+            System.IO.File.WriteAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"), JsonConvert.SerializeObject(states));
+        }
     }
 }

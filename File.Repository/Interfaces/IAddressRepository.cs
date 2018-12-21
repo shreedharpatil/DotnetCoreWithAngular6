@@ -14,5 +14,9 @@ namespace File.Repository.Interfaces
         IEnumerable<State> GetStates();
 
         IEnumerable<District> GetDistricts(int stateId);
+
+        void AddTaluk(int stateId, int districtId, Taluk taluk);
+
+        void AddVillage(int stateId, int districtId, int talukId, Village village);
     }
 }

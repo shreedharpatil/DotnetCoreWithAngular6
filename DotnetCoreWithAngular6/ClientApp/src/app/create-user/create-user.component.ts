@@ -26,4 +26,5 @@ class User {
   Email: string;
   Mobile: string;
   Address: string;
+  EMMobile: string;
 }
