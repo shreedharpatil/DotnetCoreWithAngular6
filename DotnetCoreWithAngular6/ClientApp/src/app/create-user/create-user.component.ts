@@ -13,6 +13,7 @@ export class CreateUserComponent implements OnInit {
   districts: any = [];
   taluks: any = [];
   villages: any = [];
+  feeders: any = [];
   stateId: any;
   talukId: any;
   districtId: any;
@@ -40,7 +41,7 @@ export class CreateUserComponent implements OnInit {
       this.user.District = null;
       this.user.Taluk = null;
       this.user.Village = null;
-      this.districts = state[0].districts;
+      this.districts = state.districts;
       this.taluks = [];
       this.districtId = null;
       this.talukId = null;
@@ -53,7 +54,8 @@ export class CreateUserComponent implements OnInit {
       this.user.District = district.name;
       this.user.Taluk = null;
       this.user.Village = null;
-      this.taluks = district[0].taluks;
+      this.taluks = district.taluks;
+      this.feeders = district.feeders;
       this.villages = [];
       this.talukId = null;
       this.villageId = null;
@@ -66,7 +68,8 @@ export class CreateUserComponent implements OnInit {
       this.user.Taluk = taluk.name;
       this.user.Village = null;
       this.villageId = null;
-      this.villages = taluk[0].villages;
+      this.villages = taluk.villages;
+      this.feeders = taluk.feeders;
     }
   }
 
@@ -74,6 +77,15 @@ export class CreateUserComponent implements OnInit {
     var village = this.villages.filter(p => p.id == this.villageId)[0];
     if (village != null) {
       this.user.Village = village.name;
+      if (village.feeders != null && village.feeders.length > 0) {
+        this.feeders = village.feeders;
+      }
+      else {
+        var taluk = this.taluks.filter(p => p.id == this.talukId)[0];
+        if (taluk != null) {
+          this.feeders = taluk.feeders;
+        }
+      }
     }
   }
 }

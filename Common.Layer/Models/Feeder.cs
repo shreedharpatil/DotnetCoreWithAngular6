@@ -4,14 +4,12 @@ using System.Text;
 
 namespace Common.Layer.Models
 {
-    public class Taluk
+    public class Feeder
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public IEnumerable<Village> Villages { get; set; }
-
-        public IEnumerable<Feeder> Feeders { get; set; }
+        public string Description { get; set; }
     }
 }

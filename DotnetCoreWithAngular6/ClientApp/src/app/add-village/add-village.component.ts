@@ -14,6 +14,8 @@ export class AddVillageComponent implements OnInit {
   taluks: any = [];
   talukId: any;
   districtId: any;
+  addFeeder: any = false;
+  feeder: any = {};
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,6 +24,9 @@ export class AddVillageComponent implements OnInit {
   }
 
   saveVillage() {
+    if (this.addFeeder && this.feeder.Name != null) {
+      this.village.Feeders = [this.feeder];
+    }
     this.httpClient.post('api/Village/' + this.stateId + "/" + this.districtId + "/" + this.talukId, this.village).subscribe(p => { console.log(p); alert('saved successfully'); });
   }
 

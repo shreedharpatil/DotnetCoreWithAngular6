@@ -20,25 +20,25 @@
   <div class="form-row">
     <div class="form-group col-md-3">
       <label for="inputEmail4">Select State</label>
-      <select [(ngModel)]="stateId" name="states" (change)="stateChanged()">
+      <select [(ngModel)]="stateId" name="states" (change)="stateChanged()" class="form-control">
         <option *ngFor="let s of states" value="{{s.id}}">{{s.name}}</option>
       </select>
     </div>
     <div class="form-group col-md-3">
       <label for="inputEmail4">Select District</label>
-      <select [(ngModel)]="districtId" name="districts" (change)="districtChanged()">
+      <select [(ngModel)]="districtId" name="districts" (change)="districtChanged()" class="form-control">
         <option *ngFor="let d of districts" value="{{d.id}}">{{d.name}}</option>
       </select>
     </div>
     <div class="form-group col-md-2">
       <label for="inputEmail4">Select Taluk</label>
-      <select [(ngModel)]="talukId" name="taluks" (change)="talukChanged()">
+      <select [(ngModel)]="talukId" name="taluks" (change)="talukChanged()" class="form-control">
         <option *ngFor="let t of taluks" value="{{t.id}}">{{t.name}}</option>
       </select>
     </div>
     <div class="form-group col-md-2">
       <label for="inputEmail4">Select Village</label>
-      <select [(ngModel)]="villageId" name="villages" (change)="villageChanged()">
+      <select [(ngModel)]="villageId" name="villages" (change)="villageChanged()" class="form-control">
         <option *ngFor="let v of villages" value="{{v.id}}">{{v.name}}</option>
       </select>
     </div>
@@ -48,17 +48,23 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="inputEmail4">Email Id</label>
       <input type="text" class="form-control" name="inputEmail4" placeholder="email Id" [(ngModel)]="user.Email">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="inputEmail4">Mobile number</label>
       <input type="text" class="form-control" name="inputEmail4" placeholder="Mobile No" [(ngModel)]="user.Mobile">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
       <label for="inputEmail4">Energy Meter Mobile number</label>
       <input type="text" class="form-control" name="inputEmail4" placeholder="Mobile No" [(ngModel)]="user.EMMobile">
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select Feeder</label>
+      <select [(ngModel)]="user.Feeder" name="feeders" class="form-control">
+        <option *ngFor="let v of feeders" value="{{v.id}}">{{v.name}} -- {{v.description}}</option>
+      </select>
     </div>
   </div>
   <button type="button" class="btn btn-primary" (click)="createUser()">Create</button>

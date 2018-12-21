@@ -21,10 +21,10 @@ namespace File.Repository.Implementations
         {
             var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
             var states = JsonConvert.DeserializeObject<List<State>>(data);
-            
+            state.Districts = new List<District>();
             if (states.Any())
             {
-                state.Id = states.Max(p => p.Id) + 1;
+                state.Id = states.Max(p => p.Id) + 1;                
                 states.Add(state);
             }
             else
@@ -49,18 +49,26 @@ namespace File.Repository.Implementations
             
             if (states.Any())
             {
-                var state = states.FirstOrDefault(p => p.Id == stateId);
-                if(state.Districts!= null && state.Districts.Any())
+                district.Taluks = new List<Taluk>();
+                var ds = states.SelectMany(p => p.Districts);
+                var t = ds.Any() ? ds.Max(p => p.Id) : 0;
+                district.Id = t + 1;
+
+                if (district.Feeders != null && district.Feeders.Any())
                 {
-                    district.Id = state.Districts.Max(p => p.Id) + 1;                    
+                    var feeder = district.Feeders.First();
+                    feeder.Id = GetMaximumFeederId(states) + 1;
+                    district.Feeders = new List<Feeder> { feeder };
                 }
                 else
                 {
-                    district.Id = 1;
+                    district.Feeders = new List<Feeder>();
                 }
 
+                var state = states.FirstOrDefault(p => p.Id == stateId);
                 var districts = state.Districts != null ? state.Districts.ToList() : new List<District>();
                 districts.Add(district);
+
                 state.Districts = districts;
             }
 
@@ -86,15 +94,22 @@ namespace File.Repository.Implementations
                 var district = state.Districts.FirstOrDefault(p => p.Id == districtId);
                 if(district != null)
                 {
-                    if (district.Taluks != null && district.Taluks.Any())
-                    {
-                        taluk.Id = district.Taluks.Max(p => p.Id) + 1;
+                    taluk.Villages = new List<Village>();
+                    var tqs = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks));
+                    var t = tqs.Any() ? tqs.Max(p => p.Id) : 0;
+                    taluk.Id = t + 1;
+
+                    if(taluk.Feeders != null && taluk.Feeders.Any())
+                    {                        
+                        var feeder = taluk.Feeders.First();
+                        feeder.Id = GetMaximumFeederId(states) + 1;
+                        taluk.Feeders = new List<Feeder> { feeder };
                     }
                     else
                     {
-                        taluk.Id = 1;
+                        taluk.Feeders = new List<Feeder>();
                     }
-
+                    
                     var taluks = district.Taluks != null ? district.Taluks.ToList() : new List<Taluk>();
                     taluks.Add(taluk);
                     district.Taluks = taluks;
@@ -114,15 +129,22 @@ namespace File.Repository.Implementations
                 var state = states.FirstOrDefault(p => p.Id == stateId);
                 var district = state.Districts.FirstOrDefault(p => p.Id == districtId);
                 var taluk = district.Taluks.FirstOrDefault(p => p.Id == talukId);
+                
                 if (taluk != null)
                 {
-                    if (taluk.Villages != null && taluk.Villages.Any())
+                    var vls = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages)));
+                    var t = vls.Any() ? vls.Max(p => p.Id) : 0;
+                    village.Id = t + 1;
+
+                    if (village.Feeders != null && village.Feeders.Any())
                     {
-                        village.Id = taluk.Villages.Max(p => p.Id) + 1;
+                        var feeder = village.Feeders.First();
+                        feeder.Id = GetMaximumFeederId(states) + 1;
+                        village.Feeders = new List<Feeder> { feeder };
                     }
                     else
                     {
-                        village.Id = 1;
+                        village.Feeders = new List<Feeder>();
                     }
 
                     var villages = taluk.Villages != null ? taluk.Villages.ToList() : new List<Village>();
@@ -132,6 +154,17 @@ namespace File.Repository.Implementations
             }
 
             System.IO.File.WriteAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"), JsonConvert.SerializeObject(states));
+        }
+
+        private static int GetMaximumFeederId(IEnumerable<State> states)
+        {
+            var stateFeeders = states.SelectMany(p => p.Districts.SelectMany(q => q.Feeders));
+            var talukFeeders = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Feeders)));
+            var villageFeeders = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages.SelectMany(s => s.Feeders))));
+            var x = new List<int> { stateFeeders.Any() ? stateFeeders.Max(p => p.Id) : 0,
+                talukFeeders.Any() ? talukFeeders.Max(p => p.Id) : 0,
+                villageFeeders.Any() ? villageFeeders.Max(p => p.Id) : 0 }.Max();
+            return x;
         }
     }
 }

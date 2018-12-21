@@ -3,25 +3,43 @@
   <div class="form-row">
     <div class="form-group col-md-3">
       <label for="inputEmail4">Select State</label>
-      <select [(ngModel)]="stateId" name="states" (change)="stateChanged()">
+      <select [(ngModel)]="stateId" name="states" (change)="stateChanged()" class="form-control">
         <option *ngFor="let s of states" value="{{s.id}}">{{s.name}}</option>
       </select>
     </div>
     <div class="form-group col-md-3">
       <label for="inputEmail4">Select District</label>
-      <select [(ngModel)]="districtId" name="districts" (change)="districtChanged()">
+      <select [(ngModel)]="districtId" name="districts" (change)="districtChanged()" class="form-control">
         <option *ngFor="let d of districts" value="{{d.id}}">{{d.name}}</option>
       </select>
     </div>
     <div class="form-group col-md-3">
       <label for="inputEmail4">Select Taluk</label>
-      <select [(ngModel)]="talukId" name="taluks">
+      <select [(ngModel)]="talukId" name="taluks" class="form-control">
         <option *ngFor="let t of taluks" value="{{t.id}}">{{t.name}}</option>
       </select>
     </div>
     <div class="form-group col-md-3">
       <label for="inputEmail4">Name</label>
       <input type="text" class="form-control" name="inputEmail4" placeholder="Village name" [(ngModel)]="village.Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" name="addfeeder" [(ngModel)]="addFeeder" />
+      <label class="form-check-label" for="gridCheck">
+        Add Feeder
+      </label>
+    </div>
+  </div>
+  <div class="form-row" *ngIf="addFeeder">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Name</label>
+      <input type="text" class="form-control" name="feedername" placeholder="Feeder name" [(ngModel)]="feeder.Name">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Description</label>
+      <input type="text" class="form-control" name="feederdesc" placeholder="Feeder description" [(ngModel)]="feeder.Description">
     </div>
   </div>
   <button type="button" class="btn btn-primary" (click)="saveVillage()">Create</button>

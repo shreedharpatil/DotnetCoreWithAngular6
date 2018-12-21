@@ -10,7 +10,9 @@ export class AddDistrictComponent implements OnInit {
 
   states: any = [];
   district: any = { Name: '' };
+  feeder: any = {};
   stateId: any;
+  addFeeder: any = false;
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
@@ -18,6 +20,9 @@ export class AddDistrictComponent implements OnInit {
   }
 
   saveDistrict() {
+    if (this.addFeeder && this.feeder.Name != null) {
+      this.district.Feeders = [this.feeder];
+    }
     this.httpClient.post('api/District/' + this.stateId, this.district).subscribe(p => { console.log(p); alert('Saved successfully'); });
   }
 

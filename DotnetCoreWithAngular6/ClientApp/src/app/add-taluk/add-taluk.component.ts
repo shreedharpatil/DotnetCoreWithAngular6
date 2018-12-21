@@ -12,6 +12,8 @@ export class AddTalukComponent implements OnInit {
   stateId: any;
   districts: any = [];
   districtId: any;
+  addFeeder: any = false;
+  feeder: any = {};
 
   constructor(private httpClient: HttpClient) { }
 
@@ -20,6 +22,9 @@ export class AddTalukComponent implements OnInit {
   }
 
   saveTaluk() {
+    if (this.addFeeder && this.feeder.Name != null) {
+      this.taluk.Feeders = [this.feeder];
+    }
     this.httpClient.post('api/Taluk/' + this.stateId + "/" + this.districtId, this.taluk).subscribe(p => { console.log(p); alert('saved successfully'); });
   }
 

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Common.Layer.Models
+namespace Common.Layer.DTO
 {
-    public class User
+    public class UserDTO
     {
         public string RRNo { get; set; }
 
@@ -30,6 +30,6 @@ namespace Common.Layer.Models
 
         public string Pincode { get; set; }
 
-        public int Feeder { get; set; }
+        public string  Feeder { get; set; }
     }
 }

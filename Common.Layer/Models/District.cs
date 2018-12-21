@@ -11,5 +11,7 @@ namespace Common.Layer.Models
         public string Name { get; set; }
 
         public IEnumerable<Taluk> Taluks { get; set; }
+
+        public IEnumerable<Feeder> Feeders { get; set; }
     }
 }
