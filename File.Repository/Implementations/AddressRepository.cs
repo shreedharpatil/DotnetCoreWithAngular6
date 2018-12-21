@@ -95,7 +95,7 @@ namespace File.Repository.Implementations
                         taluk.Id = 1;
                     }
 
-                    var taluks = district.Taluks.ToList();
+                    var taluks = district.Taluks != null ? district.Taluks.ToList() : new List<Taluk>();
                     taluks.Add(taluk);
                     district.Taluks = taluks;
                 }                
@@ -125,7 +125,7 @@ namespace File.Repository.Implementations
                         village.Id = 1;
                     }
 
-                    var villages = taluk.Villages.ToList();
+                    var villages = taluk.Villages != null ? taluk.Villages.ToList() : new List<Village>();
                     villages.Add(village);
                     taluk.Villages = villages;
                 }

@@ -16,7 +16,7 @@ export class AddTalukComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.states = this.httpClient.get('api/State').subscribe(p => { this.states = p; this.districts = this.states[0].districts; });
+   this.httpClient.get('api/State').subscribe(p => { this.states = p; this.districts = this.states[0].districts; });
   }
 
   saveTaluk() {
@@ -26,7 +26,7 @@ export class AddTalukComponent implements OnInit {
   stateChanged() {
     var state = this.states.filter(p => p.id == this.stateId);
     if (state != null) {
-      this.districts = state.districts;
+      this.districts = state[0].districts;
       this.districtId = null;
     }
   }

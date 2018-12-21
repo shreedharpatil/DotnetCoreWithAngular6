@@ -1,4 +1,4 @@
-<form>
+<app-homepage></app-homepage><form>
   <div class="form-row">
     <div class="form-group col-md-2">
       <label for="inputEmail4">RRNO</label>
@@ -16,6 +16,36 @@
   <div class="form-group">
     <label for="inputAddress">Address</label>
     <textarea class="form-control" name="exampleFormControlTextarea1" rows="3" [(ngModel)]="user.Address"></textarea>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select State</label>
+      <select [(ngModel)]="stateId" name="states" (change)="stateChanged()">
+        <option *ngFor="let s of states" value="{{s.id}}">{{s.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select District</label>
+      <select [(ngModel)]="districtId" name="districts" (change)="districtChanged()">
+        <option *ngFor="let d of districts" value="{{d.id}}">{{d.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">Select Taluk</label>
+      <select [(ngModel)]="talukId" name="taluks" (change)="talukChanged()">
+        <option *ngFor="let t of taluks" value="{{t.id}}">{{t.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">Select Village</label>
+      <select [(ngModel)]="villageId" name="villages" (change)="villageChanged()">
+        <option *ngFor="let v of villages" value="{{v.id}}">{{v.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-2">
+      <label for="inputEmail4">Pin Code</label>
+      <input type="text" class="form-control" name="inputEmail4" placeholder="Pin code" [(ngModel)]="user.Pincode">
+    </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-4">

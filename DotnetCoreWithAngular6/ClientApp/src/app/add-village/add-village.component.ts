@@ -18,7 +18,7 @@ export class AddVillageComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.states = this.httpClient.get('api/State').subscribe(p => { this.states = p; this.districts = this.states[0].districts; this.taluks = this.districts[0].taluks; });
+   this.httpClient.get('api/State').subscribe(p => { this.states = p; this.districts = this.states[0].districts; this.taluks = this.districts[0].taluks; });
   }
 
   saveVillage() {
@@ -28,7 +28,7 @@ export class AddVillageComponent implements OnInit {
   stateChanged() {
     var state = this.states.filter(p => p.id == this.stateId);
     if (state != null) {
-      this.districts = state.districts;
+      this.districts = state[0].districts;
       this.taluks = [];
       this.districtId = null;
       this.talukId = null;
@@ -38,7 +38,7 @@ export class AddVillageComponent implements OnInit {
   districtChanged() {
     var district = this.districts.filter(p => p.id == this.districtId);
     if (district != null) {
-      this.taluks = district.taluks;
+      this.taluks = district[0].taluks;
       this.talukId = null;
     }
   }
