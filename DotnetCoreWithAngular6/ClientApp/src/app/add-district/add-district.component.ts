@@ -11,7 +11,7 @@ export class AddDistrictComponent implements OnInit {
   states: any = [];
   district: any = { Name: '' };
   stateId: any;
-  
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.httpClient.get('api/State').subscribe(p => { console.log(p); this.states = p; });
