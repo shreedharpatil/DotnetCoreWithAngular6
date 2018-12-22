@@ -1,0 +1,40 @@
+<app-homepage></app-homepage>
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" [ngClass]="{'active' : this.activeTab == 'district' }" href="#accordion" (click)="$event.preventDefault();select('district')">District Feeders</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [ngClass]="{'active' : this.activeTab == 'taluk' }" href="#accordion" (click)="$event.preventDefault();select('taluk')">Taluk Feeders</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" [ngClass]="{'active' : this.activeTab == 'village' }" href="#accordion" (click)="$event.preventDefault();select('village')">Village Feeders</a>
+  </li>
+</ul>
+
+<div id="accordion">
+  <div class="card" *ngFor="let v of feeders">
+    <div class="card-header">
+      <a class="card-link" data-toggle="collapse" href="#{{v.name}}">
+        {{v.name}} Feeders
+      </a>
+    </div>
+    <div id="{{v.name}}" class="collapse show" data-parent="#accordion">
+      <div class="card-body">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let f of v.feeders">
+              <td>{{f.name}}</td>
+              <td>{{f.description}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

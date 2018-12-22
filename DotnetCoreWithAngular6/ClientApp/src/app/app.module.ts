@@ -14,6 +14,7 @@ import { AddStateComponent } from './add-state/add-state.component';
 import { AddDistrictComponent } from './add-district/add-district.component';
 import { AddTalukComponent } from './add-taluk/add-taluk.component';
 import { AddVillageComponent } from './add-village/add-village.component';
+import { ViewFeederComponent } from './view-feeder/view-feeder.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AddVillageComponent } from './add-village/add-village.component';
     AddStateComponent,
     AddDistrictComponent,
     AddTalukComponent,
-    AddVillageComponent
+    AddVillageComponent,
+    ViewFeederComponent
   ],
   imports: [
     BrowserModule,

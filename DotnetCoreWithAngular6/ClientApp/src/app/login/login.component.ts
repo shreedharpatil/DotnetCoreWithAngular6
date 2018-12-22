@@ -19,6 +19,6 @@ export class LoginComponent implements OnInit {
   }
 
   validateuserCredentials() {
-    this.httpClient.post('api/Login', this.credentials).subscribe(p => { console.log(p); if (p) { this.router.navigate(['/homepage']); } else { alert('invalid credentials'); } });
+    this.httpClient.post('api/Login', this.credentials).subscribe(p => { console.log(p); if (p) { this.router.navigate(['/viewusers']); } else { alert('invalid credentials'); } });
   }
 }

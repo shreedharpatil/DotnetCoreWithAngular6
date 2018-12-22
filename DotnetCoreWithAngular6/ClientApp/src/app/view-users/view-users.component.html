@@ -1,28 +1,53 @@
 <app-homepage></app-homepage>
-<p> List of users</p>
-<!--<div class="row" >
+<div class="row">
+  <div class="col-md-2">
+    <label>List of Users</label>
+  </div>
+
+  <div class="col-md-6 right">
+    <input type="checkbox" class="form-check-input" name="addfeeder" [(ngModel)]="cardView" />
+    <label class="form-check-label" for="gridCheck">
+      Card View
+    </label>
+  </div>
+</div>
+<div class="row" *ngIf="cardView">
   <div class="col-sm-6" *ngFor="let user of users">
     <div class="card">
       <div class="card-body">
-        <p class="card-text">RRNo: {{user.rrNo}}</p>
-        <p class="card-text">Firstname: {{user.firstname}}</p>
-        <p class="card-text">Lastname: {{user.lastname}}</p>
-        <p class="card-text">Email: {{user.email}}</p>
-        <p class="card-text">Mobile: {{user.mobile}}</p>
-        <p class="card-text">Em mobile: {{user.emMobile}}</p>
-        <p class="card-text">Address: {{user.address}}</p>
-        <p class="card-text">State: {{user.state}}</p>
-        <p class="card-text">District: {{user.district}}</p>
-        <p class="card-text">Taluk: {{user.taluk}}</p>
-        <p class="card-text">Village: {{user.village}}</p>
-        <p class="card-text">Pincode: {{user.pincode}}</p>
-        <p class="card-text">Feeder: {{user.feeder}}</p>
+        <div class="row">
+          <div class="col-sm-6"><p class="card-text">RRNo: {{user.rrNo}}</p></div>
+          <div class="col-sm-6"><p class="card-text">Firstname: {{user.firstname}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"><p class="card-text">Lastname: {{user.lastname}}</p></div>
+          <div class="col-sm-6"><p class="card-text">Email: {{user.email}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"> <p class="card-text">Mobile: {{user.mobile}}</p></div>
+          <div class="col-sm-6"><p class="card-text">Em mobile: {{user.emMobile}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"><p class="card-text">Address: {{user.address}}</p></div>
+          <div class="col-sm-6"><p class="card-text">State: {{user.state}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"> <p class="card-text">District: {{user.district}}</p></div>
+          <div class="col-sm-6"> <p class="card-text">Taluk: {{user.taluk}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6"> <p class="card-text">Village: {{user.village}}</p></div>
+          <div class="col-sm-6"> <p class="card-text">Pincode: {{user.pincode}}</p></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12"> <p class="card-text">Feeder: {{user.feeder}}</p></div>
+        </div>
       </div>
     </div>
   </div>
-</div>-->
+</div>
 
-<div class="table-responsive">
+<div class="table-responsive" *ngIf="!cardView">
   <table class="table">
     <thead class="thead-light">
       <tr>

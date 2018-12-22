@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ViewUsersComponent implements OnInit {
   users: any = [];
+  cardView = true;
   constructor(private httpClient: HttpClient) {
   }
 
