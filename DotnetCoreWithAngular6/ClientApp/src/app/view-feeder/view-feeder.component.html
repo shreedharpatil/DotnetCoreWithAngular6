@@ -49,7 +49,7 @@
           <div class="card" *ngFor="let f of v.feeders">
             <div class="card-header">
               <a class="card-link" data-toggle="collapse" href="#{{f.name}}">
-                {{f.name}} Transformers
+                Feeder : {{f.name}}({{f.description}}) -> Transformers
               </a>
             </div>
             <div id="{{f.name}}" class="collapse show" data-parent="#accordion1">
