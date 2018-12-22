@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent implements OnInit {
-  title = 'ClientApp';
+  title = 'Advanced Energy Meter App';
   credentials = { Username: 'shreedhar', Password: 'patil' };
 
   constructor(private httpClient: HttpClient, private router: Router) { }

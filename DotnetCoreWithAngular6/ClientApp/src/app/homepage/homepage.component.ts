@@ -12,4 +12,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
   }
 
+  prevent(e) {
+    e.preventDefault();
+  }
 }

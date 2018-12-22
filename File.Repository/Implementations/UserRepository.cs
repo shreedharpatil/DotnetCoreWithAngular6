@@ -47,7 +47,6 @@ namespace File.Repository.Implementations
             districts.AddRange(villages);
             var usrs = (from u in users
                        from f in districts.Where(p => p.Id == u.Feeder).DefaultIfEmpty()
-                        //join f in districts on u.Feeder equals f.Id
                         select new UserDTO
                         {
                             Address = u.Address,

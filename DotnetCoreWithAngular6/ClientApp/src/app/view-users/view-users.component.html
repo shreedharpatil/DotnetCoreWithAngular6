@@ -1,6 +1,6 @@
 <app-homepage></app-homepage>
 <p> List of users</p>
-<div class="row" >
+<!--<div class="row" >
   <div class="col-sm-6" *ngFor="let user of users">
     <div class="card">
       <div class="card-body">
@@ -20,4 +20,42 @@
       </div>
     </div>
   </div>
+</div>-->
+
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">RRNo</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">EmMobile</th>
+        <th scope="col">Address</th>
+        <th scope="col">State</th>
+        <th scope="col">District</th>
+        <th scope="col">Taluk</th>
+        <th scope="col">Village</th>
+        <th scope="col">Pincode</th>
+        <th scope="col">Feeder</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td class="card-text">{{user.rrNo}}</td>
+        <td class="card-text">{{user.firstname}}</td>
+        <td class="card-text">{{user.lastname}}</td>
+        <td class="card-text">{{user.email}}</td>
+        <td class="card-text"> {{user.mobile}}</td>
+        <td class="card-text">{{user.emMobile}}</td>
+        <td class="card-text">{{user.address}}</td>
+        <td class="card-text">{{user.state}}</td>
+        <td class="card-text">{{user.district}}</td>
+        <td class="card-text">{{user.taluk}}</td>
+        <td class="card-text">{{user.village}}</td>
+        <td class="card-text">{{user.pincode}}</td>
+        <td class="card-text"> {{user.feeder}}</td>
+      </tr>
+  </table>
 </div>
