@@ -20,6 +20,7 @@ namespace File.Repository.Implementations
 
         public void AddFeeder(string type, Feeder feeder)
         {
+            feeder.Transformers = new List<Transformer>();
             var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
             var states = JsonConvert.DeserializeObject<List<State>>(data);
             if (type.Equals("Village", StringComparison.InvariantCultureIgnoreCase))

@@ -4,14 +4,12 @@ using System.Text;
 
 namespace Common.Layer.Models
 {
-    public class Feeder
+    public class Transformer
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        public IEnumerable<Transformer> Transformers { get; set; }
     }
 }

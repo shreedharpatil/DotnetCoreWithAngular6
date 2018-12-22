@@ -59,6 +59,7 @@ namespace File.Repository.Implementations
                 {
                     var feeder = district.Feeders.First();
                     feeder.Id = FeederExtensions.GetNextFeederId(states);
+                    feeder.Transformers = new List<Transformer>();
                     district.Feeders = new List<Feeder> { feeder };
                 }
                 else
@@ -104,6 +105,7 @@ namespace File.Repository.Implementations
                     {                        
                         var feeder = taluk.Feeders.First();
                         feeder.Id = FeederExtensions.GetNextFeederId(states);
+                        feeder.Transformers = new List<Transformer>();
                         taluk.Feeders = new List<Feeder> { feeder };
                     }
                     else
@@ -141,6 +143,7 @@ namespace File.Repository.Implementations
                     {
                         var feeder = village.Feeders.First();
                         feeder.Id = FeederExtensions.GetNextFeederId(states);
+                        feeder.Transformers = new List<Transformer>();
                         village.Feeders = new List<Feeder> { feeder };
                     }
                     else

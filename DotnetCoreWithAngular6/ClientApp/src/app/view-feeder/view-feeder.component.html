@@ -45,20 +45,58 @@
             </div>
           </div>
         </div>
-        <table class="table">
-          <thead class="thead-light">
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let f of v.feeders">
-            <td>{{f.name}}</td>
-            <td>{{f.description}}</td>
-          </tr>
-          </tbody>
-        </table>
+        <div id="accordion1">
+          <div class="card" *ngFor="let f of v.feeders">
+            <div class="card-header">
+              <a class="card-link" data-toggle="collapse" href="#{{f.name}}">
+                {{f.name}} Transformers
+              </a>
+            </div>
+            <div id="{{f.name}}" class="collapse show" data-parent="#accordion1">
+              <div class="card-body">
+                <div class="form-group">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="addTransformer" [(ngModel)]="f.addTransformer" />
+                    <label class="form-check-label" for="gridCheck">
+                      Add Transformer
+                    </label>
+                  </div>
+                </div>
+                <div class="form-row" *ngIf="f.addTransformer">
+                  <div class="form-group col-md-6">
+                    <label for="transformername">Name</label>
+                    <input type="text" class="form-control" name="transformername" placeholder="Transformer name" [(ngModel)]="f.TransformerName">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="transformerdesc">Description</label>
+                    <div class="row">
+                      <div class="col-md-10">
+                        <input type="text" class="form-control" name="transformerdesc" placeholder="Transformer description" [(ngModel)]="f.TransformerDescription">
+                      </div>
+                      <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" (click)="addTransformer(v.id, f)">Save</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let t of f.transformers">
+                      <td>{{t.name}}</td>
+                      <td>{{t.description}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

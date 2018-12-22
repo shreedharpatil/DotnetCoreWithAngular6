@@ -50,6 +50,7 @@ namespace DotnetCoreWithAngular6
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<IFeederRepository, FeederRepository>();
+            services.AddTransient<ITransformerRepository, TransformerRepository>();
             services.AddTransient<AemContext, AemContext>();
             services.AddDbContext<AemContext>(options => options.UseSqlServer(string.Format(config.AppSettings.ConnectionString, config.AppSettings.DbFilePath)));
         }

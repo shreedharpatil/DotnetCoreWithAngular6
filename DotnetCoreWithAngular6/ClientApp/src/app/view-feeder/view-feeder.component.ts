@@ -36,6 +36,17 @@ export class ViewFeederComponent implements OnInit {
       error => { alert('An error occurred. Try again later.'); });
   }
 
+  addTransformer(typeId, data) {
+    this.httpClient.post('api/Transformer/' + this.activeTab + "/" + typeId, { Id: data.id, Name: data.TransformerName, Description: data.TransformerDescription }).subscribe(p => {
+      alert('Transformer saved successfully.');
+      data.TransformerName = null;
+      data.FeederDescrTransformerDescriptioniption = null;
+      data.addTransformer = false;
+      this.loadData();
+      },
+      error => { alert('An error occurred. Try again later.'); });
+  }
+
   select(type) {
     this.activeTab = type;
     if (type == "district") {
