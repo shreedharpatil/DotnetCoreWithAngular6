@@ -20,18 +20,43 @@
     </div>
     <div id="{{v.name}}" class="collapse show" data-parent="#accordion">
       <div class="card-body">
+        <div class="form-group">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" name="addfeeder" [(ngModel)]="v.addFeeder" />
+            <label class="form-check-label" for="gridCheck">
+              Add Feeder
+            </label>
+          </div>
+        </div>
+        <div class="form-row" *ngIf="v.addFeeder">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="text" class="form-control" name="feedername" placeholder="Feeder name" [(ngModel)]="v.FeederName">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Description</label>
+            <div class="row">
+              <div class="col-md-10">
+                <input type="text" class="form-control" name="feederdesc" placeholder="Feeder description" [(ngModel)]="v.FeederDescription">
+              </div>
+              <div class="col-md-2">
+                <button type="button" class="btn btn-primary" (click)="addFeeder(v)">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <table class="table">
           <thead class="thead-light">
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-            </tr>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+          </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let f of v.feeders">
-              <td>{{f.name}}</td>
-              <td>{{f.description}}</td>
-            </tr>
+          <tr *ngFor="let f of v.feeders">
+            <td>{{f.name}}</td>
+            <td>{{f.description}}</td>
+          </tr>
           </tbody>
         </table>
       </div>
