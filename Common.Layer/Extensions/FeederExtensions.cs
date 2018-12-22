@@ -10,12 +10,14 @@ namespace Common.Layer.Extensions
     {
         public static int GetNextFeederId(IEnumerable<State> states)
         {
-            return GetFeeders(states.ToList()).Max(p => p.Id) + 1;
+            var tcs = GetFeeders(states.ToList()).ToList();
+            return tcs.Any() ? (tcs.Max(p => p.Id) + 1) : 1;
         }
 
         public static int GetNextTransformerId(IEnumerable<State> states)
         {
-            return GetTransformers(states.ToList()).Max(p => p.Id) + 1;
+            var tcs = GetTransformers(states.ToList()).ToList();
+            return tcs.Any() ? (tcs.Max(p => p.Id) + 1) : 1;
         }
 
         public static IEnumerable<Transformer> GetTransformers(IList<State> states)
