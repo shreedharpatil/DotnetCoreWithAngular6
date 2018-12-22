@@ -8,12 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent implements OnInit {
+  feederId: any;
   user: any = {};
   states: any = [];
   districts: any = [];
   taluks: any = [];
   villages: any = [];
   feeders: any = [];
+  transformers : any = [];
   stateId: any;
   talukId: any;
   districtId: any;
@@ -41,10 +43,12 @@ export class CreateUserComponent implements OnInit {
       this.user.District = null;
       this.user.Taluk = null;
       this.user.Village = null;
+      this.user.Feeder = null;
       this.districts = state.districts;
       this.taluks = [];
       this.districtId = null;
       this.talukId = null;
+      this.feederId = null;
     }
   }
 
@@ -54,11 +58,14 @@ export class CreateUserComponent implements OnInit {
       this.user.District = district.name;
       this.user.Taluk = null;
       this.user.Village = null;
+      this.user.Feeder = null;
       this.taluks = district.taluks;
       this.feeders = district.feeders;
       this.villages = [];
       this.talukId = null;
       this.villageId = null;
+      this.feederId = null;
+      this.user.Transformer = null;
     }
   }
 
@@ -67,14 +74,20 @@ export class CreateUserComponent implements OnInit {
     if (taluk != null) {
       this.user.Taluk = taluk.name;
       this.user.Village = null;
+      this.user.Feeder = null;
       this.villageId = null;
+      this.feederId = null;
       this.villages = taluk.villages;
       this.feeders = taluk.feeders;
+      this.user.Transformer = null;
     }
   }
 
   villageChanged() {
     var village = this.villages.filter(p => p.id == this.villageId)[0];
+    this.user.Feeder = null;
+    this.feederId = null;
+    this.user.Transformer = null;
     if (village != null) {
       this.user.Village = village.name;
       if (village.feeders != null && village.feeders.length > 0) {
@@ -85,6 +98,18 @@ export class CreateUserComponent implements OnInit {
         if (taluk != null) {
           this.feeders = taluk.feeders;
         }
+      }
+    }
+  }
+
+  feederChanged() {
+    this.user.Feeder = this.feederId;
+    this.user.Transformer = null;
+    var feeder = this.feeders.filter(p => p.id == this.feederId)[0];
+    if (feeder != null) {
+      this.transformers = [];
+      if (feeder.transformers != null && feeder.transformers.length > 0) {
+        this.transformers = feeder.transformers;
       }
     }
   }

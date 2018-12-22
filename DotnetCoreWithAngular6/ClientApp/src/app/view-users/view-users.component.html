@@ -40,7 +40,8 @@
           <div class="col-sm-6"> <p class="card-text">Pincode: {{user.pincode}}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-12"> <p class="card-text">Feeder: {{user.feeder}}</p></div>
+          <div class="col-sm-6"> <p class="card-text">Feeder: {{user.feeder}}</p></div>
+          <div class="col-sm-6"> <p class="card-text">TC: {{user.transformer}}</p></div>
         </div>
       </div>
     </div>
@@ -64,6 +65,7 @@
         <th scope="col">Village</th>
         <th scope="col">Pincode</th>
         <th scope="col">Feeder</th>
+        <th scope="col">TC</th>
       </tr>
     </thead>
     <tbody>
@@ -81,6 +83,7 @@
         <td class="card-text">{{user.village}}</td>
         <td class="card-text">{{user.pincode}}</td>
         <td class="card-text"> {{user.feeder}}</td>
+        <td class="card-text"> {{user.transformer}}</td>
       </tr>
   </table>
 </div>

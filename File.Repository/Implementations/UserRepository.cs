@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Common.Layer.Extensions;
 
 namespace File.Repository.Implementations
 {
@@ -34,19 +35,20 @@ namespace File.Repository.Implementations
             System.IO.File.WriteAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "User.json"), JsonConvert.SerializeObject(users));
         }
 
+        
+
         public IEnumerable<UserDTO> GetUsers()
         {
             var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "User.json"));
             var statesData = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
             var users = JsonConvert.DeserializeObject<List<User>>(data);
             var states = JsonConvert.DeserializeObject<List<State>>(statesData);
-            var districts = states.SelectMany(p => p.Districts.SelectMany(q => q.Feeders)).ToList();
-            var taluks = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Feeders))).ToList();
-            var villages = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages.SelectMany(s => s.Feeders)))).ToList();
-            districts.AddRange(taluks);
-            districts.AddRange(villages);
+            var feeders = FeederExtensions.GetFeeders(states);
+            var transformers = FeederExtensions.GetTransformers(states);
+
             var usrs = (from u in users
-                       from f in districts.Where(p => p.Id == u.Feeder).DefaultIfEmpty()
+                       from f in feeders.Where(p => p.Id == u.Feeder).DefaultIfEmpty()
+                       from t in transformers.Where(p => p.Id == u.Transformer).DefaultIfEmpty()
                         select new UserDTO
                         {
                             Address = u.Address,
@@ -54,6 +56,7 @@ namespace File.Repository.Implementations
                             Email = u.Email,
                             EMMobile = u.EMMobile,
                             Feeder = f != null ? $"{f.Name} -- {f.Description}" : "No Feeder Assigned",
+                            Transformer = t != null ? $"{t.Name} -- {t.Description}" : "No TC Assigned",
                             Firstname = u.Firstname,
                             Lastname = u.Lastname,
                             Mobile = u.Mobile,

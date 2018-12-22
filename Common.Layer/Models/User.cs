@@ -31,5 +31,7 @@ namespace Common.Layer.Models
         public string Pincode { get; set; }
 
         public int Feeder { get; set; }
+
+        public int Transformer { get; set; }
     }
 }

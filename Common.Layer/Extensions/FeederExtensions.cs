@@ -10,45 +10,49 @@ namespace Common.Layer.Extensions
     {
         public static int GetNextFeederId(IEnumerable<State> states)
         {
-            var enumerable = states as State[] ?? states.ToArray();
-            var sts = enumerable.ToList();
-
-            var dts = sts.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
-                .ToList();
-
-            var tks = sts.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
-                .Where(p => p.Feeders != null).SelectMany(p => p.Feeders).ToList();
-
-            var vls = sts.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
-                .Where(p => p.Villages != null).SelectMany(p => p.Villages).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
-                .ToList();
-
-            var x = new List<int> { dts.Any() ? dts.Max(p => p.Id) : 0,
-                tks.Any() ? tks.Max(p => p.Id) : 0,
-                vls.Any() ? vls.Max(p => p.Id) : 0 }.Max();
-            return x + 1;
+            return GetFeeders(states.ToList()).Max(p => p.Id) + 1;
         }
 
         public static int GetNextTransformerId(IEnumerable<State> states)
         {
-            var enumerable = states as State[] ?? states.ToArray();
-            var sts = enumerable.ToList();
+            return GetTransformers(states.ToList()).Max(p => p.Id) + 1;
+        }
 
-            var dts = sts.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
+        public static IEnumerable<Transformer> GetTransformers(IList<State> states)
+        {
+            var dts = states.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
                 .Where(p => p.Transformers != null).SelectMany(p => p.Transformers).ToList();
 
-            var tks = sts.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
+            var tks = states.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
                 .Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
                 .Where(p => p.Transformers != null).SelectMany(p => p.Transformers).ToList();
 
-            var vls = sts.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
+            var vls = states.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
                 .Where(p => p.Villages != null).SelectMany(p => p.Villages).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
                 .Where(p => p.Transformers != null).SelectMany(p => p.Transformers).ToList();
-            
-            var x = new List<int> { dts.Any() ? dts.Max(p => p.Id) : 0,
-                tks.Any() ? tks.Max(p => p.Id) : 0,
-                vls.Any() ? vls.Max(p => p.Id) : 0 }.Max();
-            return x + 1;
+
+            dts.AddRange(tks);
+            dts.AddRange(vls);
+
+            return dts;
+        }
+
+        public static IEnumerable<Feeder> GetFeeders(IList<State> states)
+        {
+            var dts = states.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
+                .ToList();
+
+            var tks = states.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
+                .Where(p => p.Feeders != null).SelectMany(p => p.Feeders).ToList();
+
+            var vls = states.Where(p => p.Districts != null).SelectMany(p => p.Districts).Where(p => p.Taluks != null).SelectMany(p => p.Taluks)
+                .Where(p => p.Villages != null).SelectMany(p => p.Villages).Where(p => p.Feeders != null).SelectMany(p => p.Feeders)
+                .ToList();
+
+            dts.AddRange(tks);
+            dts.AddRange(vls);
+
+            return dts;
         }
     }
 }

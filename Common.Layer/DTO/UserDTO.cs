@@ -31,5 +31,7 @@ namespace Common.Layer.DTO
         public string Pincode { get; set; }
 
         public string  Feeder { get; set; }
+
+        public string Transformer { get; set; }
     }
 }
