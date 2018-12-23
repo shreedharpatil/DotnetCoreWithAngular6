@@ -14,11 +14,11 @@
 <div id="accordion">
   <div class="card" *ngFor="let v of feeders">
     <div class="card-header">
-      <a class="card-link" data-toggle="collapse" href="#{{v.name}}">
+      <a class="card-link" data-toggle="collapse" href="#{{v.name}}" (click)="v.toggle = !v.toggle;">
         {{v.name}} Feeders
       </a>
     </div>
-    <div id="{{v.name}}" class="collapse show" data-parent="#accordion">
+    <div id="{{v.name}}" class="collapse" [ngClass]="{'show' : v.toggle == true}" data-parent="#accordion">
       <div class="card-body">
         <div class="form-group">
           <div class="form-check">
@@ -48,11 +48,11 @@
         <div id="accordion1">
           <div class="card" *ngFor="let f of v.feeders">
             <div class="card-header">
-              <a class="card-link" data-toggle="collapse" href="#{{f.name}}">
+              <a class="card-link" data-toggle="collapse" href="#{{f.name}}" (click)="f.toggle = !f.toggle;">
                 Feeder : {{f.name}}({{f.description}}) -> Transformers
               </a>
             </div>
-            <div id="{{f.name}}" class="collapse show" data-parent="#accordion1">
+            <div id="{{f.name}}" class="collapse" [ngClass]="{'show' : f.toggle == true}" data-parent="#accordion1">
               <div class="card-body">
                 <div class="form-group">
                   <div class="form-check">

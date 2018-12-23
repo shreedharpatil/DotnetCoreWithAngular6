@@ -11,6 +11,9 @@ export class ViewFeederComponent implements OnInit {
   villages: any = [];
   states: any = [];
   feeders: any = [];
+  districtFeeders = [];
+  talukFeeders = [];
+  villageFeeders = [];
   activeTab = 'district';
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -21,7 +24,10 @@ export class ViewFeederComponent implements OnInit {
   loadData() {
     this.httpClient.get('api/State').subscribe(p => {
       this.states = p;
-      this.select('district');
+      this.getDistrictFeeders();
+      this.getTalukFeeders();
+      this.getvillageFeeders();
+      this.feeders = this.districtFeeders;
     });
   }
 
@@ -47,35 +53,67 @@ export class ViewFeederComponent implements OnInit {
       error => { alert('An error occurred. Try again later.'); });
   }
 
-  select(type) {
-    this.activeTab = type;
-    if (type == "district") {
-      this.feeders = [];
-      for (let s of this.states) {
-        for (let d of s.districts) {
-          this.feeders.push(d);
+  getDistrictFeeders() {
+    this.districtFeeders = [];
+    for (let s of this.states) {
+      for (let d of s.districts) {
+        if (d.feeders != null && d.feeders.length > 0) {
+          for (let f of d.feeders) {
+            f.toggle = false;
+          }
+        }
+
+        d.toggle = false;
+        this.districtFeeders.push(d);
+      }
+    }
+  }
+
+  getTalukFeeders() {
+    this.talukFeeders = [];
+    for (let s of this.states) {
+      for (let d of s.districts) {
+        for (let t of d.taluks) {
+          if (t.feeders != null && t.feeders.length > 0) {
+            for (let f of t.feeders) {
+              f.toggle = false;
+            }
+          }
+          t.toggle = false;
+          this.talukFeeders.push(t);
         }
       }
     }
+  }
+
+  getvillageFeeders() {
+    this.villageFeeders = [];
+    for (let s of this.states) {
+      for (let d of s.districts) {
+        for (let t of d.taluks) {
+          for (let v of t.villages) {
+            if (v.feeders != null && v.feeders.length > 0) {
+              for (let f of v.feeders) {
+                f.toggle = false;
+              }
+            }
+            v.toggle = false;
+            this.villageFeeders.push(v);
+          }
+        }
+      }
+    }
+  }
+
+  select(type) {
+    this.activeTab = type;
+    if (type == "district") {
+      this.feeders = this.districtFeeders;
+    }
     else if (type == "taluk") {
-      this.feeders = [];
-      for (let s of this.states) {
-        for (let d of s.districts) {
-          for (let t of d.taluks) {
-            this.feeders.push(t);
-          }
-        }
-      }
+      this.feeders = this.talukFeeders;
     } else {
-      for (let s of this.states) {
-        this.feeders = [];
-        for (let d of s.districts) {
-          for (let t of d.taluks) {
-            for(let v of t.villages)
-              this.feeders.push(v);
-          }
-        }
-      }
+      this.feeders = this.villageFeeders;
     }
   }
 }

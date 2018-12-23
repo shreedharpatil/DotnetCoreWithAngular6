@@ -9,16 +9,18 @@ import { HttpClient } from '@angular/common/http';
 export class AddTalukComponent implements OnInit {
   states: any = [];
   taluk: any = { Name: '' };
-  stateId: any;
+  stateId: any = 0;
   districts: any = [];
-  districtId: any;
+  districtId: any = 0;
   addFeeder: any = false;
   feeder: any = {};
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-   this.httpClient.get('api/State').subscribe(p => { this.states = p; this.districts = this.states[0].districts; });
+    this.httpClient.get('api/State').subscribe(p => {
+    this.states = p; //this.districts = this.states[0].districts;
+    });
   }
 
   saveTaluk() {
@@ -30,9 +32,10 @@ export class AddTalukComponent implements OnInit {
 
   stateChanged() {
     var state = this.states.filter(p => p.id == this.stateId);
+    this.districtId = 0;
+    this.districts = [];
     if (state != null) {
       this.districts = state[0].districts;
-      this.districtId = null;
     }
   }
 }

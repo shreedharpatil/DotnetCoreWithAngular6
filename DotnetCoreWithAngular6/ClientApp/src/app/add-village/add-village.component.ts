@@ -9,18 +9,21 @@ import { HttpClient } from '@angular/common/http';
 export class AddVillageComponent implements OnInit {
   states: any = [];
   village: any = { Name: '' };
-  stateId: any;
+  stateId: any = 0;
   districts: any = [];
   taluks: any = [];
-  talukId: any;
-  districtId: any;
+  talukId: any = 0;
+  districtId: any = 0;
   addFeeder: any = false;
   feeder: any = {};
 
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-   this.httpClient.get('api/State').subscribe(p => { this.states = p; this.districts = this.states[0].districts; this.taluks = this.districts[0].taluks; });
+    this.httpClient.get('api/State').subscribe(p => {
+    this.states = p;
+      //this.districts = this.states[0].districts; this.taluks = this.districts[0].taluks;
+    });
   }
 
   saveVillage() {
@@ -32,19 +35,22 @@ export class AddVillageComponent implements OnInit {
 
   stateChanged() {
     var state = this.states.filter(p => p.id == this.stateId);
+    this.districtId = 0;
+    this.talukId = 0;
+    this.districts = [];
+    this.taluks = [];
     if (state != null) {
       this.districts = state[0].districts;
-      this.taluks = [];
-      this.districtId = null;
-      this.talukId = null;
+      
     }
   }
 
   districtChanged() {
     var district = this.districts.filter(p => p.id == this.districtId);
+    this.talukId = 0;
+    this.taluks = [];
     if (district != null) {
       this.taluks = district[0].taluks;
-      this.talukId = null;
     }
   }
 }

@@ -11,7 +11,7 @@ export class AddDistrictComponent implements OnInit {
   states: any = [];
   district: any = { Name: '' };
   feeder: any = {};
-  stateId: any;
+  stateId: any = 0;
   addFeeder: any = false;
   constructor(private httpClient: HttpClient) { }
 
