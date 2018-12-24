@@ -8,6 +8,6 @@ namespace File.Repository.Interfaces
 {
     public interface ISendMessage
     {
-        Task Send(SendMessageDTO sendMessageDTO);
+        Task<Tuple<IEnumerable<SendMessageResponse>, IEnumerable<string>>> Send(SendMessageDTO sendMessageDTO);
     }
 }

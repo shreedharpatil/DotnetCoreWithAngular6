@@ -23,16 +23,19 @@ namespace File.Repository.Implementations
             this.configuration = configuration;
         }
 
-        public async Task Send(SendMessageDTO sendMessageDTO)
+        public async Task<Tuple<IEnumerable<SendMessageResponse>, IEnumerable<string>>> Send(SendMessageDTO sendMessageDTO)
         {
             var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "User.json"));
             var users = JsonConvert.DeserializeObject<List<User>>(data);
             var mobileNumbers = users.Where(p => p.Feeder == sendMessageDTO.FeederId).Select(p => p.Mobile);
-
+            var result = new List<SendMessageResponse>();
             foreach(var mobile in mobileNumbers)
             {
-                await this.httpClientWrapper.GetAsync<string>("https://smsapi.engineeringtgr.com/", $"send/?Mobile=8880299973&Password=1989&Message={sendMessageDTO.Message}&To={mobile}&Key=shreePcyLq6mCtfBs7TG1FKjUAek");
+                var r = await this.httpClientWrapper.GetAsync<SendMessageResponse>("https://smsapi.engineeringtgr.com/", $"send/?Mobile=8880299973&Password=1989&Message={sendMessageDTO.Message}&To={mobile}&Key=shreePcyLq6mCtfBs7TG1FKjUAek");
+                result.Add(r);
             }
+
+            return  new Tuple<IEnumerable<SendMessageResponse>, IEnumerable<string>>(result, mobileNumbers);
         }
     }
 }

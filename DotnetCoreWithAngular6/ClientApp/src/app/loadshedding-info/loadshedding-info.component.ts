@@ -32,11 +32,13 @@ export class LoadsheddingInfoComponent implements OnInit {
     this.httpClient.post('api/SendMessage', { FeederId: this.feederId, Message: this.message })
       .subscribe(p => {
         alert('Message sent successfully.');
+        console.log(p);
         this.message = null;
         this.stateId = 0;
         this.districtId = 0;
         this.talukId = 0;
         this.villageId = 0;
+        this.feederId = 0;
       }
         , error => alert('An error occurred. Try again later.'));
   }

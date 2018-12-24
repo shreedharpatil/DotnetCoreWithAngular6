@@ -23,12 +23,12 @@ namespace DotnetCoreWithAngular6.Controllers
         }
         
         [HttpPost]
-        public IActionResult Post([FromBody] SendMessageDTO sendMessage)
+        public async Task<IActionResult> Post([FromBody] SendMessageDTO sendMessage)
         {
             try
             {
-                this.sendMessage.Send(sendMessage);
-                return this.Ok();
+                var result = await this.sendMessage.Send(sendMessage);
+                return this.Ok(new { MobileNumbers = result.Item2, Result = result.Item1 });
             }
             catch (Exception ex)
             {
