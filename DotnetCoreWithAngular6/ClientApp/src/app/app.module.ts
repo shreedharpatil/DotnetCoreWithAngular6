@@ -15,6 +15,7 @@ import { AddDistrictComponent } from './add-district/add-district.component';
 import { AddTalukComponent } from './add-taluk/add-taluk.component';
 import { AddVillageComponent } from './add-village/add-village.component';
 import { ViewFeederComponent } from './view-feeder/view-feeder.component';
+import { LoadsheddingInfoComponent } from './loadshedding-info/loadshedding-info.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ViewFeederComponent } from './view-feeder/view-feeder.component';
     AddDistrictComponent,
     AddTalukComponent,
     AddVillageComponent,
-    ViewFeederComponent
+    ViewFeederComponent,
+    LoadsheddingInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -40,8 +40,7 @@ export class AddVillageComponent implements OnInit {
     this.districts = [];
     this.taluks = [];
     if (state != null) {
-      this.districts = state[0].districts;
-      
+      this.districts = state[0].districts;      
     }
   }
 

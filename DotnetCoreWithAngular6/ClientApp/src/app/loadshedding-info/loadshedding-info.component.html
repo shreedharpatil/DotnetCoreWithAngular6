@@ -1,0 +1,41 @@
+<app-homepage></app-homepage>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select State</label>
+      <select [(ngModel)]="stateId" name="states" (change)="stateChanged()" class="form-control">
+        <option value="0">---- Please select ----</option>
+        <option *ngFor="let s of states" value="{{s.id}}">{{s.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select District</label>
+      <select [(ngModel)]="districtId" name="districts" (change)="districtChanged()" class="form-control">
+        <option value="0">---- Please select ----</option>
+        <option *ngFor="let d of districts" value="{{d.id}}">{{d.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select Taluk</label>
+      <select [(ngModel)]="talukId" name="taluks" class="form-control">
+        <option value="0">---- Please select ----</option>
+        <option *ngFor="let t of taluks" value="{{t.id}}">{{t.name}}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="inputEmail4">Select Feeder</label>
+      <select name="feeders" class="form-control" [(ngModel)]="feederId" (change)="feederChanged()">
+        <option value="0">---- Please select ----</option>
+        <option *ngFor="let v of feeders" value="{{v.id}}">{{v.name}} -- {{v.description}}</option>
+      </select>
+    </div>
+    
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Loadshedding Message</label>
+      <textarea class="form-control" name="inputEmail4" rows="3" [(ngModel)]="message" placeholder="Type message here"></textarea>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="sendMessage()">Send</button>
+</form>

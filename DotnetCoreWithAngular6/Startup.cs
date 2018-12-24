@@ -1,3 +1,4 @@
+using Common.Layer.HttpClient;
 using Common.Layer.Models;
 using Data.Repository.DbContext;
 using File.Repository.Implementations;
@@ -51,6 +52,9 @@ namespace DotnetCoreWithAngular6
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<IFeederRepository, FeederRepository>();
             services.AddTransient<ITransformerRepository, TransformerRepository>();
+
+            services.AddTransient<ISendMessage, SendMessage>();
+            services.AddTransient<IHttpClientWrapper, HttpclientWrapper>();
             services.AddTransient<AemContext, AemContext>();
             services.AddDbContext<AemContext>(options => options.UseSqlServer(string.Format(config.AppSettings.ConnectionString, config.AppSettings.DbFilePath)));
         }

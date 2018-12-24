@@ -9,6 +9,7 @@ import { AddDistrictComponent } from './add-district/add-district.component';
 import { AddTalukComponent } from './add-taluk/add-taluk.component';
 import { AddVillageComponent } from './add-village/add-village.component';
 import { ViewFeederComponent } from './view-feeder/view-feeder.component';
+import { LoadsheddingInfoComponent } from './loadshedding-info/loadshedding-info.component';
 
 
 const routes: Routes = [
@@ -41,7 +42,10 @@ const routes: Routes = [
   },
   {
     path: 'viewfeeders', component: ViewFeederComponent
-  }
+  },
+  //{
+  //  path: 'loadsheddingmessage', component: LoadsheddingInfoComponent
+  //}
 ];
 
 @NgModule({
