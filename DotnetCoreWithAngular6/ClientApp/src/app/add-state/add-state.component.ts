@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddStateComponent implements OnInit {
   state: any = { Name: '' };
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   ngOnInit() {
   }

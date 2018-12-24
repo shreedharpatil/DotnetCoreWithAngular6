@@ -13,7 +13,8 @@ export class AddDistrictComponent implements OnInit {
   feeder: any = {};
   stateId: any = 0;
   addFeeder: any = false;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   ngOnInit() {
     this.httpClient.get('api/State').subscribe(p => { console.log(p); this.states = p; });

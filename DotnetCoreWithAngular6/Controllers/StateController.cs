@@ -1,5 +1,6 @@
 ﻿using Common.Layer.Models;
 using File.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace DotnetCoreWithAngular6.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class StateController : ControllerBase
     {

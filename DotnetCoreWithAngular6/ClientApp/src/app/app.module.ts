@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +18,7 @@ import { ViewFeederComponent } from './view-feeder/view-feeder.component';
 import { LoadsheddingInfoComponent } from './loadshedding-info/loadshedding-info.component';
 import { AdalService } from 'adal-angular4';
 import { AuthGuard } from './AuthGuard';
+import { HttpConfigInterceptor } from './interceptor/HttpConfigInterceptor';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,9 @@ import { AuthGuard } from './AuthGuard';
     HttpClientModule,
     RouterModule
   ],
-  providers: [AuthGuard,AdalService],
+  providers: [AuthGuard, AdalService, 
+    { provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

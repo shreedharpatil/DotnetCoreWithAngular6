@@ -44,9 +44,9 @@ const routes: Routes = [
   {
     path: 'viewfeeders', component: ViewFeederComponent, canActivate: [AuthGuard]
   },
-  //{
-  //  path: 'loadsheddingmessage', component: LoadsheddingInfoComponent, canActivate: [AuthGuard]
-  //}
+  {
+    path: 'loadsheddingmessage', component: LoadsheddingInfoComponent, canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

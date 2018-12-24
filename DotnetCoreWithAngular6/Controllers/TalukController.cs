@@ -1,5 +1,6 @@
 ﻿using Common.Layer.Models;
 using File.Repository.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -7,6 +8,7 @@ namespace DotnetCoreWithAngular6.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TalukController : ControllerBase
     {
         private readonly IAddressRepository addressRepository;
