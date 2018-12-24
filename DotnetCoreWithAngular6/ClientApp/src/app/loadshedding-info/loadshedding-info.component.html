@@ -23,7 +23,7 @@
     </div>
     <div class="form-group col-md-3">
       <label for="inputEmail4">Select Feeder</label>
-      <select name="feeders" class="form-control" [(ngModel)]="feederId" (change)="feederChanged()">
+      <select name="feeders" class="form-control" [(ngModel)]="feederId">
         <option value="0">---- Please select ----</option>
         <option *ngFor="let v of feeders" value="{{v.id}}">{{v.name}} -- {{v.description}}</option>
       </select>
