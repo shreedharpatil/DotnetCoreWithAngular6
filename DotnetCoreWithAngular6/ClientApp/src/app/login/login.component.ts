@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AdalService } from 'adal-angular4';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +14,20 @@ export class LoginComponent implements OnInit {
   title = 'Advanced Energy Meter App';
   credentials = { Username: 'shreedhar', Password: 'patil' };
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router, private route: ActivatedRoute,
+    private adalSvc: AdalService) { }
 
   ngOnInit() {
-    this.httpClient.get('api/sampledata/WeatherForecasts').subscribe(p => console.log(p));
+  }
+
+  login(): void {
+    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    if (this.adalSvc.userInfo.authenticated) {
+      this.router.navigate([returnUrl]);
+    } else {
+      this.adalSvc.login();
+    }
   }
 
   validateuserCredentials() {

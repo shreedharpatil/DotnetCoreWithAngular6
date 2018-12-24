@@ -10,6 +10,7 @@ import { AddTalukComponent } from './add-taluk/add-taluk.component';
 import { AddVillageComponent } from './add-village/add-village.component';
 import { ViewFeederComponent } from './view-feeder/view-feeder.component';
 import { LoadsheddingInfoComponent } from './loadshedding-info/loadshedding-info.component';
+import { AuthGuard } from './AuthGuard';
 
 
 const routes: Routes = [
@@ -20,31 +21,31 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
-    path: 'homepage', component: HomepageComponent
+    path: 'homepage', component: HomepageComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'createuser', component: CreateUserComponent
+    path: 'createuser', component: CreateUserComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'viewusers', component: ViewUsersComponent
+    path: 'viewusers', component: ViewUsersComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'addstate', component: AddStateComponent
+    path: 'addstate', component: AddStateComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'adddistrict', component: AddDistrictComponent
+    path: 'adddistrict', component: AddDistrictComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'addtaluk', component: AddTalukComponent
+    path: 'addtaluk', component: AddTalukComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'addvillage', component: AddVillageComponent
+    path: 'addvillage', component: AddVillageComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'viewfeeders', component: ViewFeederComponent
+    path: 'viewfeeders', component: ViewFeederComponent, canActivate: [AuthGuard]
   },
   //{
-  //  path: 'loadsheddingmessage', component: LoadsheddingInfoComponent
+  //  path: 'loadsheddingmessage', component: LoadsheddingInfoComponent, canActivate: [AuthGuard]
   //}
 ];
 

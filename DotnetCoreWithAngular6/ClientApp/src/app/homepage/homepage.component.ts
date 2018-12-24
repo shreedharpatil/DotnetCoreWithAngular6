@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdalService } from 'adal-angular4';
 
 @Component({
   selector: 'app-homepage',
@@ -6,13 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-
-  constructor() { }
+  token: any;
+  isLoggedIn: boolean = false;
+  constructor(private adalSvc: AdalService) { }
 
   ngOnInit() {
+    this.token = this.adalSvc.userInfo.token;
+    this.isLoggedIn = this.adalSvc.userInfo.authenticated; 
   }
 
-  prevent(e) {
-    e.preventDefault();
+  logout(): void {
+    this.adalSvc.logOut();
   }
 }

@@ -16,6 +16,8 @@ import { AddTalukComponent } from './add-taluk/add-taluk.component';
 import { AddVillageComponent } from './add-village/add-village.component';
 import { ViewFeederComponent } from './view-feeder/view-feeder.component';
 import { LoadsheddingInfoComponent } from './loadshedding-info/loadshedding-info.component';
+import { AdalService } from 'adal-angular4';
+import { AuthGuard } from './AuthGuard';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { LoadsheddingInfoComponent } from './loadshedding-info/loadshedding-info
     HttpClientModule,
     RouterModule
   ],
-  providers: [],
+  providers: [AuthGuard,AdalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

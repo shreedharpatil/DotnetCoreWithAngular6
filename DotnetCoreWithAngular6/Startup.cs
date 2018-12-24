@@ -3,6 +3,9 @@ using Common.Layer.Models;
 using Data.Repository.DbContext;
 using File.Repository.Implementations;
 using File.Repository.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +13,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System.IO;
 
 namespace DotnetCoreWithAngular6
@@ -47,6 +51,17 @@ namespace DotnetCoreWithAngular6
                 configuration.RootPath = "ClientApp/dist/ClientApp";
             });
 
+            services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+            .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                 builder =>
+                {
+                    builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                });
+            });
+
             services.AddTransient<ILoginRepository, LoginRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAddressRepository, AddressRepository>();
@@ -71,6 +86,8 @@ namespace DotnetCoreWithAngular6
                 app.UseExceptionHandler("/Error");
             }
 
+            app.UseCors("AllowAllOrigins");
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
@@ -92,7 +109,7 @@ namespace DotnetCoreWithAngular6
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
-            });
+            });           
         }
     }
 }
