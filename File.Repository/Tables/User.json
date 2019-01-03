@@ -1,1 +1,66 @@
-[{"RRNo":"1234","Firstname":"shreedhar","Lastname":"patil","Mobile":"8880299973","EMMobile":null,"Email":"shree@patil.com","Address":"Panathur, Bangalore, 560087","State":null,"District":null,"Taluk":null,"Village":null,"Pincode":null,"Feeder":0,"Transformer":0},{"RRNo":"2345","Firstname":"Pramod","Lastname":"Patil","Mobile":"7584746578","EMMobile":null,"Email":"pramod@patil.com","Address":"Bangalore","State":null,"District":null,"Taluk":null,"Village":null,"Pincode":null,"Feeder":0,"Transformer":0},{"RRNo":"3456","Firstname":"Santosh","Lastname":"Patil","Mobile":"9505859585","EMMobile":"8595857565","Email":"s.p@g.com","Address":"MLBCC","State":"Karnataka","District":"Bagalkot","Taluk":"Badami","Village":null,"Pincode":"587201","Feeder":0,"Transformer":0},{"RRNo":"2345","Firstname":"Suneel","Lastname":"patil","Mobile":"8880299973","EMMobile":"74747474744","Email":"s.r@g.com","Address":"nasdfjh","State":"Karnataka","District":"Bagalkot","Taluk":null,"Village":null,"Pincode":"7575755","Feeder":1,"Transformer":1}]
+[
+  {
+    "RRNo": "1234",
+    "Firstname": "shreedhar",
+    "Lastname": "patil",
+    "Mobile": "8880299973",
+    "EMMobile": null,
+    "Email": "shree@patil.com",
+    "Address": "Panathur, Bangalore, 560087",
+    "State": null,
+    "District": null,
+    "Taluk": null,
+    "Village": null,
+    "Pincode": null,
+    "Feeder": 0,
+    "Transformer": 0
+  },
+  {
+    "RRNo": "2345",
+    "Firstname": "Pramod",
+    "Lastname": "Patil",
+    "Mobile": "7584746578",
+    "EMMobile": null,
+    "Email": "pramod@patil.com",
+    "Address": "Bangalore",
+    "State": null,
+    "District": null,
+    "Taluk": null,
+    "Village": null,
+    "Pincode": null,
+    "Feeder": 0,
+    "Transformer": 0
+  },
+  {
+    "RRNo": "3456",
+    "Firstname": "Santosh",
+    "Lastname": "Patil",
+    "Mobile": "9008947137",
+    "EMMobile": "8595857565",
+    "Email": "s.p@g.com",
+    "Address": "MLBCC",
+    "State": "Karnataka",
+    "District": "Bagalkot",
+    "Taluk": "Badami",
+    "Village": null,
+    "Pincode": "587201",
+    "Feeder": 1,
+    "Transformer": 1
+  },
+  {
+    "RRNo": "2345",
+    "Firstname": "Suneel",
+    "Lastname": "patil",
+    "Mobile": "8880299973",
+    "EMMobile": "74747474744",
+    "Email": "s.r@g.com",
+    "Address": "nasdfjh",
+    "State": "Karnataka",
+    "District": "Bagalkot",
+    "Taluk": null,
+    "Village": null,
+    "Pincode": "7575755",
+    "Feeder": 1,
+    "Transformer": 1
+  }
+]

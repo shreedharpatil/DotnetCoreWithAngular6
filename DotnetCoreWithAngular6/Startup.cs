@@ -1,6 +1,5 @@
 using Common.Layer.HttpClient;
 using Common.Layer.Models;
-using Data.Repository.DbContext;
 using File.Repository.Implementations;
 using File.Repository.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -61,8 +60,7 @@ namespace DotnetCoreWithAngular6
                     builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
                 });
             });
-
-            services.AddTransient<ILoginRepository, LoginRepository>();
+            
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IAddressRepository, AddressRepository>();
             services.AddTransient<IFeederRepository, FeederRepository>();
@@ -70,8 +68,9 @@ namespace DotnetCoreWithAngular6
 
             services.AddTransient<ISendMessage, SendMessage>();
             services.AddTransient<IHttpClientWrapper, HttpclientWrapper>();
-            services.AddTransient<AemContext, AemContext>();
-            services.AddDbContext<AemContext>(options => options.UseSqlServer(string.Format(config.AppSettings.ConnectionString, config.AppSettings.DbFilePath)));
+
+            services.AddTransient<Data.Repository.Interfaces.IUserRepository, Data.Repository.Implementations.UserRepository>();
+            services.AddTransient<Data.Repository.Interfaces.IAddressRepository, Data.Repository.Implementations.AddressRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

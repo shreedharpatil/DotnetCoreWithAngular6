@@ -12,9 +12,12 @@ namespace DotnetCoreWithAngular6.Controllers
     {
         private readonly IUserRepository userRepository;
 
-        public UserController(IUserRepository userRepository)
+        private readonly Data.Repository.Interfaces.IUserRepository userRepository1;
+
+        public UserController(IUserRepository userRepository, Data.Repository.Interfaces.IUserRepository userRepository1)
         {
             this.userRepository = userRepository;
+            this.userRepository1 = userRepository1;
         }
 
         [HttpGet]
@@ -27,6 +30,21 @@ namespace DotnetCoreWithAngular6.Controllers
         public IActionResult Post([FromBody] User user)
         {
             this.userRepository.AddUser(user);
+            return this.Ok();
+        }
+
+        [HttpGet]
+        [Route("get")]
+        public IActionResult Get1()
+        {
+            return this.Ok(this.userRepository1.GetUsers());
+        }
+
+        [HttpPost]
+        [Route("post")]
+        public IActionResult Post1([FromBody] Data.Repository.Models.User user)
+        {
+            this.userRepository1.AddUser(user);
             return this.Ok();
         }
     }
