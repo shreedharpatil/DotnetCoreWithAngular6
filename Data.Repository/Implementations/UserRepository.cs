@@ -31,8 +31,8 @@ namespace Data.Repository.Implementations
         public IEnumerable<User> GetUsers()
         {
             var usrs = users.Find(p => true).ToList();
-            var fs = usrs.Where(p => !string.IsNullOrWhiteSpace(p.Feeder)).Select(p => new ObjectId(p.Feeder));
-            var ts = usrs.Where(p => !string.IsNullOrWhiteSpace(p.Transformer)).Select(p => new ObjectId(p.Transformer));
+            var fs = usrs.Where(p => !string.IsNullOrWhiteSpace(p.Feeder)).Select(p => new ObjectId(p.Feeder)).ToList();
+            var ts = usrs.Where(p => !string.IsNullOrWhiteSpace(p.Transformer)).Select(p => new ObjectId(p.Transformer)).ToList();
             var ss = this.states.Find(p => true).ToList();
             var dfs = ss.SelectMany(p => p.Districts.SelectMany(q => q.Feeders)).ToList();
             var tfs = ss.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Feeders))).ToList();
