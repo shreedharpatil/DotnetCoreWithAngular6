@@ -18,10 +18,11 @@ namespace File.Repository.Implementations
             this.configuration = configuration;
         }
 
-        public void AddTransformer(string type, int typeId, Transformer transformer)
+        public void AddTransformer(string type, int typeId, int feederId, Transformer transformer)
         {
             var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
             var states = JsonConvert.DeserializeObject<List<State>>(data);
+            transformer.Id = feederId;
             if (type.Equals("Village", StringComparison.InvariantCultureIgnoreCase))
             {
                 var village = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages))).FirstOrDefault(p => p.Id == typeId);

@@ -1,12 +1,13 @@
-﻿using Common.Layer.Models;
-using File.Repository.Interfaces;
+﻿
+using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using Data.Repository.Models;
 
 namespace DotnetCoreWithAngular6.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/taluk")]
     [ApiController]
     [Authorize]
     public class TalukV1Controller : ControllerBase
@@ -20,7 +21,7 @@ namespace DotnetCoreWithAngular6.Controllers.V1
 
         [HttpPost]
         [Route("{stateId}/{districtId}")]
-        public IActionResult Post(int stateId, int districtId, [FromBody] Taluk taluk)
+        public IActionResult Post(string stateId, string districtId, [FromBody] Taluk taluk)
         {
             try
             {

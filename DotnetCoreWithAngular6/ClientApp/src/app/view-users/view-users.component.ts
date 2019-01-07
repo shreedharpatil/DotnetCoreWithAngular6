@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-view-users',
@@ -13,6 +14,6 @@ export class ViewUsersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.get('api/User').subscribe(p => { console.log(p); this.users = p; });
+    this.httpClient.get(environment.apiBase + 'User').subscribe(p => { console.log(p); this.users = p; });
   }
 }

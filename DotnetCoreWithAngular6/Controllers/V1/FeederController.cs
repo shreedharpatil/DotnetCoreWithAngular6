@@ -1,12 +1,13 @@
-﻿using Common.Layer.Models;
-using File.Repository.Interfaces;
+﻿using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
+using Data.Repository.Models;
 
 namespace DotnetCoreWithAngular6.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/feeder")]
     [ApiController]
     [Authorize]
     public class FeederV1Controller : ControllerBase
@@ -19,12 +20,12 @@ namespace DotnetCoreWithAngular6.Controllers.V1
         }
 
         [HttpPost]
-        [Route("{type}")]
-        public IActionResult Post(string type, [FromBody] Feeder feeder)
+        [Route("{type}/{typeId}")]
+        public async Task<IActionResult> Post(string type, string typeId, [FromBody] Feeder feeder)
         {
             try
             {
-                this.feederRepository.AddFeeder(type, feeder);
+                await this.feederRepository.AddFeeder(type, typeId, feeder);
                 return this.Ok();
             }
             catch (Exception ex)

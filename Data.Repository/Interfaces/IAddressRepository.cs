@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Data.Repository.Interfaces
 {
@@ -16,8 +17,8 @@ namespace Data.Repository.Interfaces
 
         IEnumerable<District> GetDistricts(string stateId);
 
-        void AddTaluk(string stateId, string districtId, Taluk taluk);
+        Task AddTaluk(string stateId, string districtId, Taluk taluk);
 
-        void AddVillage(string stateId, string districtId, string talukId, Village village);
+        Task AddVillage(string stateId, string districtId, string talukId, Village village);
     }
 }

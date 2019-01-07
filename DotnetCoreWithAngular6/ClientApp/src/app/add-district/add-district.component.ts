@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-district',
@@ -17,14 +18,14 @@ export class AddDistrictComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.httpClient.get('api/State').subscribe(p => { console.log(p); this.states = p; });
+    this.httpClient.get(environment.apiBase + 'State').subscribe(p => { console.log(p); this.states = p; });
   }
 
   saveDistrict() {
     if (this.addFeeder && this.feeder.Name != null) {
       this.district.Feeders = [this.feeder];
     }
-    this.httpClient.post('api/District/' + this.stateId, this.district).subscribe(p => { console.log(p); alert('Saved successfully'); });
+    this.httpClient.post(environment.apiBase + 'District/' + this.stateId, this.district).subscribe(p => { console.log(p); alert('Saved successfully'); });
   }
 
 }

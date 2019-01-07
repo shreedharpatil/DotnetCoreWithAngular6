@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-loadshedding-info',
@@ -23,13 +24,13 @@ export class LoadsheddingInfoComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('api/State').subscribe(p => {
+    this.httpClient.get(environment.apiBase + 'State').subscribe(p => {
       this.states = p;
     });
   }
 
   sendMessage() {
-    this.httpClient.post('api/SendMessage', { FeederId: this.feederId, Message: this.message })
+    this.httpClient.post(environment.apiBase + 'SendMessage', { FeederId: this.feederId, Message: this.message })
       .subscribe(p => {
         alert('Message sent successfully.');
         console.log(p);

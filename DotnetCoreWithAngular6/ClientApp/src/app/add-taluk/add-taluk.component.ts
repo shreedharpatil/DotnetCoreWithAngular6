@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-add-taluk',
@@ -18,7 +19,7 @@ export class AddTalukComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('api/State').subscribe(p => {
+    this.httpClient.get(environment.apiBase + 'State').subscribe(p => {
     this.states = p; //this.districts = this.states[0].districts;
     });
   }
@@ -27,7 +28,7 @@ export class AddTalukComponent implements OnInit {
     if (this.addFeeder && this.feeder.Name != null) {
       this.taluk.Feeders = [this.feeder];
     }
-    this.httpClient.post('api/Taluk/' + this.stateId + "/" + this.districtId, this.taluk).subscribe(p => { console.log(p); alert('saved successfully'); });
+    this.httpClient.post(environment.apiBase + 'Taluk/' + this.stateId + "/" + this.districtId, this.taluk).subscribe(p => { console.log(p); alert('saved successfully'); });
   }
 
   stateChanged() {

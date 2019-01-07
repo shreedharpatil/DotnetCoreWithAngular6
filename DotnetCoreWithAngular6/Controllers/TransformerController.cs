@@ -19,12 +19,12 @@ namespace DotnetCoreWithAngular6.Controllers
         }
 
         [HttpPost]
-        [Route("{type}/{typeId}")]
-        public IActionResult Post(string type, int typeId, [FromBody] Transformer transformer)
+        [Route("{type}/{typeId}/{feederId}")]
+        public IActionResult Post(string type, int typeId, int feederId, [FromBody] Transformer transformer)
         {
             try
             {
-                this.transformerRepository.AddTransformer(type, typeId, transformer);
+                this.transformerRepository.AddTransformer(type, typeId, feederId, transformer);
                 return this.Ok();
             }
             catch (Exception ex)

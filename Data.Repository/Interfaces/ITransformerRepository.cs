@@ -1,12 +1,10 @@
 ﻿using Data.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace Data.Repository.Interfaces
 {
     public interface ITransformerRepository
     {
-        void AddTransformer(string type, int typeId, Transformer transformer);
+        Task AddTransformer(string type, string typeId, string feederId, Transformer transformer);
     }
 }

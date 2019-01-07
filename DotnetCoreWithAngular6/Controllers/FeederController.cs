@@ -19,12 +19,12 @@ namespace DotnetCoreWithAngular6.Controllers
         }
 
         [HttpPost]
-        [Route("{type}")]
-        public IActionResult Post(string type, [FromBody] Feeder feeder)
+        [Route("{type}/{typeId}")]
+        public IActionResult Post(string type, int typeId, [FromBody] Feeder feeder)
         {
             try
             {
-                this.feederRepository.AddFeeder(type, feeder);
+                this.feederRepository.AddFeeder(type, typeId, feeder);
                 return this.Ok();
             }
             catch (Exception ex)

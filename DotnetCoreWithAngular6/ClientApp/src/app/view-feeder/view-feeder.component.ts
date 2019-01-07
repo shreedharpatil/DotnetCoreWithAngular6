@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from '@angular/router';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-view-feeder',
@@ -22,7 +23,7 @@ export class ViewFeederComponent implements OnInit {
   }
 
   loadData() {
-    this.httpClient.get('api/State').subscribe(p => {
+    this.httpClient.get(environment.apiBase + 'State').subscribe(p => {
       this.states = p;
       this.getDistrictFeeders();
       this.getTalukFeeders();
@@ -32,22 +33,24 @@ export class ViewFeederComponent implements OnInit {
   }
 
   addFeeder(data) {
-    this.httpClient.post('api/Feeder/' + this.activeTab, { Id : data.id, Name : data.FeederName, Description : data.FeederDescription }).subscribe(p => {
+    this.httpClient.post(environment.apiBase + 'Feeder/' + this.activeTab + "/" + data.id, { Name : data.FeederName, Description : data.FeederDescription }).subscribe(p => {
       alert('Feeder saved successfully.');
       data.FeederName = null;
       data.FeederDescription = null;
       data.addFeeder = false;
+      this.activeTab = 'district';  
       this.loadData();
     },
       error => { alert('An error occurred. Try again later.'); });
   }
 
   addTransformer(typeId, data) {
-    this.httpClient.post('api/Transformer/' + this.activeTab + "/" + typeId, { Id: data.id, Name: data.TransformerName, Description: data.TransformerDescription }).subscribe(p => {
+    this.httpClient.post(environment.apiBase + 'Transformer/' + this.activeTab + "/" + typeId + "/" + data.id, { Name: data.TransformerName, Description: data.TransformerDescription }).subscribe(p => {
       alert('Transformer saved successfully.');
       data.TransformerName = null;
       data.FeederDescrTransformerDescriptioniption = null;
       data.addTransformer = false;
+        this.activeTab = 'district';
       this.loadData();
       },
       error => { alert('An error occurred. Try again later.'); });

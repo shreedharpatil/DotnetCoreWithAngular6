@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace DotnetCoreWithAngular6.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/district")]
     [ApiController]
+    [Authorize]
     public class DistrictV1Controller : ControllerBase
     {
         private readonly IAddressRepository addressRepository;

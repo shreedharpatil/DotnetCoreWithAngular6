@@ -1,12 +1,13 @@
-﻿using Common.Layer.Models;
-using File.Repository.Interfaces;
+﻿using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
+using Data.Repository.Models;
 
 namespace DotnetCoreWithAngular6.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/village")]
     [ApiController]
     [Authorize]
     public class VillageV1Controller : ControllerBase
@@ -20,11 +21,11 @@ namespace DotnetCoreWithAngular6.Controllers.V1
 
         [HttpPost]
         [Route("{stateId}/{districtId}/{talukId}")]
-        public IActionResult Post(int stateId, int districtId, int talukId, [FromBody] Village village)
+        public async Task<IActionResult> Post(string stateId, string districtId, string talukId, [FromBody] Village village)
         {
             try
             {
-                this.addressRepository.AddVillage(stateId, districtId, talukId, village);
+                await this.addressRepository.AddVillage(stateId, districtId, talukId, village);
                 return this.Ok();
             }
             catch (Exception ex)

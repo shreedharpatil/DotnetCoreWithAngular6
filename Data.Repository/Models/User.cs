@@ -33,8 +33,8 @@ namespace Data.Repository.Models
 
         public string Pincode { get; set; }
 
-        public int Feeder { get; set; }
+        public string Feeder { get; set; }
 
-        public int Transformer { get; set; }
+        public string Transformer { get; set; }
     }
 }

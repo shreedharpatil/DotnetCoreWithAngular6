@@ -1,16 +1,16 @@
-﻿using Common.Layer.DTO;
-using Common.Layer.Models;
-using File.Repository.Interfaces;
+﻿
+using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data.Repository.Models;
 
 namespace DotnetCoreWithAngular6.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/sendmessage")]
     [Authorize]
     [ApiController]
     public class SendMessageV1Controller : ControllerBase

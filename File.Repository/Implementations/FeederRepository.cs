@@ -18,9 +18,10 @@ namespace File.Repository.Implementations
             this.configuration = configuration;
         }
 
-        public void AddFeeder(string type, Feeder feeder)
+        public void AddFeeder(string type, int typeId, Feeder feeder)
         {
             feeder.Transformers = new List<Transformer>();
+            feeder.Id = typeId;
             var data = System.IO.File.ReadAllText(string.Format(configuration.AppSettings.DbTablesFilePath, "Address.json"));
             var states = JsonConvert.DeserializeObject<List<State>>(data);
             if (type.Equals("Village", StringComparison.InvariantCultureIgnoreCase))

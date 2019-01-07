@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-add-village',
@@ -20,7 +21,7 @@ export class AddVillageComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.httpClient.get('api/State').subscribe(p => {
+    this.httpClient.get(environment.apiBase + 'State').subscribe(p => {
     this.states = p;
       //this.districts = this.states[0].districts; this.taluks = this.districts[0].taluks;
     });
@@ -30,7 +31,7 @@ export class AddVillageComponent implements OnInit {
     if (this.addFeeder && this.feeder.Name != null) {
       this.village.Feeders = [this.feeder];
     }
-    this.httpClient.post('api/Village/' + this.stateId + "/" + this.districtId + "/" + this.talukId, this.village).subscribe(p => { console.log(p); alert('saved successfully'); });
+    this.httpClient.post(environment.apiBase + 'Village/' + this.stateId + "/" + this.districtId + "/" + this.talukId, this.village).subscribe(p => { console.log(p); alert('saved successfully'); });
   }
 
   stateChanged() {

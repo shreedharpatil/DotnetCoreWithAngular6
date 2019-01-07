@@ -71,6 +71,9 @@ namespace DotnetCoreWithAngular6
 
             services.AddTransient<Data.Repository.Interfaces.IUserRepository, Data.Repository.Implementations.UserRepository>();
             services.AddTransient<Data.Repository.Interfaces.IAddressRepository, Data.Repository.Implementations.AddressRepository>();
+            services.AddTransient<Data.Repository.Interfaces.IFeederRepository, Data.Repository.Implementations.FeederRepository>();
+            services.AddTransient<Data.Repository.Interfaces.ITransformerRepository, Data.Repository.Implementations.TransformerRepository>();
+            services.AddTransient<Data.Repository.Interfaces.ISendMessage, Data.Repository.Implementations.SendMessage>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,6 +7,6 @@ namespace File.Repository.Interfaces
 {
     public interface IFeederRepository
     {
-        void AddFeeder(string type, Feeder feeder);
+        void AddFeeder(string type, int typeId, Feeder feeder);
     }
 }

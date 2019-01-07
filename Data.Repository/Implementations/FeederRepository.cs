@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Common.Layer.Extensions;
-using Data.Repository.Interfaces;
+﻿using Data.Repository.Interfaces;
 using Data.Repository.Models;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Data.Repository.Implementations
 {
@@ -26,45 +24,94 @@ namespace Data.Repository.Implementations
             this.states = database.GetCollection<State>("State");
         }
 
-        public void AddFeeder(string type, Feeder feeder)
+        public async Task AddFeeder(string type, string typeId, Feeder feeder)
         {
             feeder.Transformers = new List<Transformer>();
-            var states = this.states.Find(p => true).ToList();
+            feeder.Id = new ObjectId(typeId);
             if (type.Equals("Village", StringComparison.InvariantCultureIgnoreCase))
             {
-                var village = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages))).FirstOrDefault(p => p.Id == feeder.Id);
-                if (village != null)
+                var filter = Builders<State>.Filter.And(
+                    Builders<State>.Filter.Eq("Districts.Taluks.Villages.Id", feeder.Id));
+
+                var t = this.states.Find(filter).FirstOrDefault();
+
+                var data = t.Districts.Select(p =>
                 {
-                    var feeders = village.Feeders != null ? village.Feeders.ToList() : new List<Feeder>();
-                    feeder.Id = ObjectId.GenerateNewId();
-                    feeder.Transformers = new List<Transformer>();
-                    feeders.Add(feeder);
-                    village.Feeders = feeders;
+                    var w = p.Taluks.FirstOrDefault(q => q.Villages.Any(r => r.Id == feeder.Id));
+                    if (w != null)
+                    {
+                        return new { DistrictId = p.Id, TalukId = w.Id };
+                    }
+
+                    return null;
+                }).FirstOrDefault(p => p != null);
+
+                if (data != null)
+                {
+                    var y = new FindOneAndUpdateOptions<State, State>
+                    {
+                        ArrayFilters = new List<ArrayFilterDefinition>
+                        {
+                            new BsonDocumentArrayFilterDefinition<State>(new BsonDocument("d._id", data.DistrictId)),
+                            new BsonDocumentArrayFilterDefinition<State>(new BsonDocument("t._id", data.TalukId)),
+                            new BsonDocumentArrayFilterDefinition<State>(new BsonDocument("v._id", feeder.Id))
+                        }
+                    };
+                    //var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+                    var update = Builders<State>.Update.Push("Districts.$[d].Taluks.$[t].Villages.$[v].Feeders", feeder);
+                    var t1 = await this.states.FindOneAndUpdateAsync(filter, update, y);
                 }
             }
             else if (type.Equals("Taluk", StringComparison.InvariantCultureIgnoreCase))
             {
-                var taluk = states.SelectMany(p => p.Districts.SelectMany(q => q.Taluks)).FirstOrDefault(p => p.Id == feeder.Id);
-                if (taluk != null)
+                var filter = Builders<State>.Filter.And(
+                    Builders<State>.Filter.Eq("Districts.Taluks.Id", feeder.Id));
+
+                var t = this.states.Find(filter).FirstOrDefault();
+
+                var data = t.Districts.Select(p =>
                 {
-                    var feeders = taluk.Feeders != null ? taluk.Feeders.ToList() : new List<Feeder>();
-                    feeder.Id = ObjectId.GenerateNewId();
-                    feeder.Transformers = new List<Transformer>();
-                    feeders.Add(feeder);
-                    taluk.Feeders = feeders;
+                    var w = p.Taluks.FirstOrDefault(r => r.Id == feeder.Id);
+                    if (w != null)
+                    {
+                        return new {DistrictId = p.Id, TalukId = w.Id};
+                    }
+
+                    return null;
+                }).FirstOrDefault(p => p != null);
+
+                if (data != null)
+                {
+                    var y = new FindOneAndUpdateOptions<State, State>
+                    {
+                        ArrayFilters = new List<ArrayFilterDefinition>
+                        {
+                            new BsonDocumentArrayFilterDefinition<State>(new BsonDocument("d._id", data.DistrictId)),
+                            new BsonDocumentArrayFilterDefinition<State>(new BsonDocument("t._id", data.TalukId))
+                        }
+                    };
+                    //var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+                    var update = Builders<State>.Update.Push("Districts.$[d].Taluks.$[t].Feeders", feeder);
+                    var t1 = await this.states.FindOneAndUpdateAsync(filter, update, y);
                 }
             }
             else if (type.Equals("District", StringComparison.InvariantCultureIgnoreCase))
             {
-                var district = states.SelectMany(p => p.Districts).FirstOrDefault(p => p.Id == feeder.Id);
-                if (district != null)
+                var filter = Builders<State>.Filter.And(
+                    Builders<State>.Filter.Eq("Districts.Id", feeder.Id));
+
+                var t = this.states.Find(filter).FirstOrDefault();
+
+                var y = new FindOneAndUpdateOptions<State, State>
                 {
-                    var feeders = district.Feeders != null ? district.Feeders.ToList() : new List<Feeder>();
-                    feeder.Id = ObjectId.GenerateNewId();
-                    feeder.Transformers = new List<Transformer>();
-                    feeders.Add(feeder);
-                    district.Feeders = feeders;
-                }
+                    ArrayFilters = new List<ArrayFilterDefinition>
+                    {
+                        new BsonDocumentArrayFilterDefinition<State>(new BsonDocument("d._id", feeder.Id))
+                    }
+                };
+                //var updateOptions = new UpdateOptions { ArrayFilters = arrayFilters };
+                var update = Builders<State>.Update.Push("Districts.$[d].Feeders", feeder);
+                var t1 = await this.states.FindOneAndUpdateAsync(filter, update, y);
             }
         }
     }

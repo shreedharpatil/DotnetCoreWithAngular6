@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from "src/environments/environment";
 
 @Component({
   selector: 'app-create-user',
@@ -24,7 +25,7 @@ export class CreateUserComponent implements OnInit {
   constructor(private httpClient:HttpClient, private router:Router) { }
 
   ngOnInit() {
-    this.httpClient.get('api/State').subscribe(p => {
+    this.httpClient.get(environment.apiBase + 'State').subscribe(p => {
       this.states = p;
       //this.districts = this.states[0].districts;
       //this.taluks = this.districts[0].taluks;
@@ -33,7 +34,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   createUser() {
-    this.httpClient.post('api/User', this.user).subscribe(p => { console.log(p); this.router.navigate(['viewusers']); });
+    this.httpClient.post(environment.apiBase + 'User', this.user).subscribe(p => { console.log(p); this.router.navigate(['viewusers']); });
   }
 
   stateChanged() {

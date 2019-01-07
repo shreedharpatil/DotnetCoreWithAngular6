@@ -1,12 +1,13 @@
-﻿using Common.Layer.Models;
-using File.Repository.Interfaces;
+﻿using Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
+using Data.Repository.Models;
 
 namespace DotnetCoreWithAngular6.Controllers.V1
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/transformer")]
     [Authorize]
     [ApiController]
     public class TransformerV1Controller : ControllerBase
@@ -19,12 +20,12 @@ namespace DotnetCoreWithAngular6.Controllers.V1
         }
 
         [HttpPost]
-        [Route("{type}/{typeId}")]
-        public IActionResult Post(string type, int typeId, [FromBody] Transformer transformer)
+        [Route("{type}/{typeId}/{feederId}")]
+        public async Task<IActionResult> Post(string type, string typeId, string feederId, [FromBody] Transformer transformer)
         {
             try
             {
-                this.transformerRepository.AddTransformer(type, typeId, transformer);
+               await this.transformerRepository.AddTransformer(type, typeId, feederId, transformer);
                 return this.Ok();
             }
             catch (Exception ex)
