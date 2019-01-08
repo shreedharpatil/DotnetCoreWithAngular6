@@ -27,21 +27,22 @@
           <div class="col-sm-6"><p class="card-text">Em mobile: {{user.emMobile}}</p></div>
         </div>
         <div class="row">
-          <div class="col-sm-6"><p class="card-text">Address: {{user.address}}</p></div>
-          <div class="col-sm-6"><p class="card-text">State: {{user.state}}</p></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6"> <p class="card-text">District: {{user.district}}</p></div>
-          <div class="col-sm-6"> <p class="card-text">Taluk: {{user.taluk}}</p></div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6"> <p class="card-text">Village: {{user.village}}</p></div>
-          <div class="col-sm-6"> <p class="card-text">Pincode: {{user.pincode}}</p></div>
-        </div>
-        <div class="row">
           <div class="col-sm-6"> <p class="card-text">Feeder: {{user.feeder}}</p></div>
           <div class="col-sm-6"> <p class="card-text">TC: {{user.transformer}}</p></div>
         </div>
+        <div class="row">
+          <div class="col-sm-12"><p class="card-text">Address: {{user.address}}, {{user.village}}, {{user.pincode}}, {{user.taluk}}, {{user.district}}, {{user.state}}</p></div>
+          <!--<div class="col-sm-6"><p class="card-text">State: {{user.state}}</p></div>-->
+        </div>
+        <!--<div class="row">
+    <div class="col-sm-6"> <p class="card-text">District: {{user.district}}</p></div>
+    <div class="col-sm-6"> <p class="card-text">Taluk: {{user.taluk}}</p></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6"> <p class="card-text">Village: {{user.village}}</p></div>
+    <div class="col-sm-6"> <p class="card-text">Pincode: {{user.pincode}}</p></div>
+  </div>-->
+
       </div>
     </div>
   </div>
@@ -58,11 +59,11 @@
         <th scope="col">Mobile</th>
         <th scope="col">EmMobile</th>
         <th scope="col">Address</th>
-        <th scope="col">State</th>
+        <!--<th scope="col">State</th>
         <th scope="col">District</th>
         <th scope="col">Taluk</th>
         <th scope="col">Village</th>
-        <th scope="col">Pincode</th>
+        <th scope="col">Pincode</th>-->
         <th scope="col">Feeder</th>
         <th scope="col">TC</th>
       </tr>
@@ -75,12 +76,12 @@
         <td class="card-text">{{user.email}}</td>
         <td class="card-text"> {{user.mobile}}</td>
         <td class="card-text">{{user.emMobile}}</td>
-        <td class="card-text">{{user.address}}</td>
-        <td class="card-text">{{user.state}}</td>
+        <td class="card-text">{{user.address}}, {{user.village}}, {{user.pincode}}, {{user.taluk}}, {{user.district}}, {{user.state}}</td>
+        <!--<td class="card-text">{{user.state}}</td>
         <td class="card-text">{{user.district}}</td>
         <td class="card-text">{{user.taluk}}</td>
         <td class="card-text">{{user.village}}</td>
-        <td class="card-text">{{user.pincode}}</td>
+        <td class="card-text">{{user.pincode}}</td>-->
         <td class="card-text"> {{user.feeder}}</td>
         <td class="card-text"> {{user.transformer}}</td>
       </tr>

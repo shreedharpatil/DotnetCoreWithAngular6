@@ -39,11 +39,7 @@ namespace Data.Repository.Implementations
             var ffs = ss.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages.SelectMany(s => s.Feeders)))).ToList();
             dfs.AddRange(tfs);
             dfs.AddRange(ffs);
-            var dts = ss.SelectMany(p => p.Districts.SelectMany(q => q.Feeders.SelectMany(r => r.Transformers))).ToList();
-            var dts1 = ss.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Feeders.SelectMany(s => s.Transformers)))).ToList();
-            var dts2 = ss.SelectMany(p => p.Districts.SelectMany(q => q.Taluks.SelectMany(r => r.Villages.SelectMany(s => s.Feeders.SelectMany(o => o.Transformers))))).ToList();
-            dts.AddRange(dts1);
-            dts.AddRange(dts2);
+            var dts = dfs.SelectMany(r => r.Transformers).ToList();
             usrs.ForEach(p =>
             {
                 var e = dfs.FirstOrDefault(p1 => fs.Contains(p1.Id));
